@@ -155,6 +155,8 @@ Now fix a morphism $Phi : cC -> cC'$ of cosheaves.
   - $Phi$ is a *monomorphism* when each $Phi_tau : cC(tau) -> cC'(tau)$ is injective;
   - $Phi$ is an *epimorphism* when each $Phi_tau : cC(tau) -> cC'(tau)$ is surjective; and
   - $Phi$ is an *isomorphism* when each $Phi_tau : cC(tau) -> cC'(tau)$ is an isomorphism.
+
+  We also say that $Phi$ is a *strict monomorphism* (resp. *strict epimorphism*) if $Phi$ is a monomorphism (resp. epimorphism) but is not an isomorphism.
 ]
 #proposition[
 When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consists of $(Phi_tau)^(-1) : cC'(tau) -> cC(tau)$ for each simplex $tau$ in $K$. 
@@ -189,7 +191,7 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
 ]
 
 #example[
-  Let $V = {v_1, v_2}$ and let $K = {tau_1, tau_2}$, where $tau_1 = {v_1}$ and $tau_2 = {v_2}$. Let $cC$ be the cosheaf such that $cC(tau_1) = FF$ and $cC(tau_2) = 0$. (There is no face relation in $K$.) Then  with $FK$-coefficients, $K$ has chain complex $ bC_k (K ; FK) = cases(FF^2 quad &"if" k = 0 comma, 0 quad &"otherwise,") $ with all the boundary maps necessarily zero, which gives 
+  Let $V = {v_1, v_2}$ and let $K = {tau_1, tau_2}$, where $tau_1 = {v_1}$ and $tau_2 = {v_2}$. Let $cC$ be the cosheaf such that $cC(tau_1) = FF$ and $cC(tau_2) = 0$. (There is no non-trivial face relation in $K$.) Then  with $FK$-coefficients, $K$ has chain complex $ bC_k (K ; FK) = cases(FF^2 quad &"if" k = 0 comma, 0 quad &"otherwise,") $ with all the boundary maps necessarily zero, which gives 
   $
     bH_k (K ; FK) = cases(FF^2 quad &"if" k = 0 comma, 0 quad &"otherwise.")
   $
@@ -198,11 +200,71 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
   Thus $FK$ does not have the homology of a single point, but $cC$ does. 
 ]
 
-#TODO[what is strict monomorphism? ]
+#TODO[what is strict monomorphism? each component is injective or some component is injective?]
 
 #example[
+  Let $V = {v_1, v_2}$ and $K = {tau_1, tau_2, tau_3}$, where $tau_1 = {v_1}$, $tau_2 = {v_2}$ and $tau_3 = {v_1, v_2}$. (In other words, $K = Delta(1)$.) Define cosheaf $cC$  as follows: 
+  $
+    tau_1 &mapsto FF, \
+    tau_2 &mapsto FF^2, \
+    tau_3 &mapsto FF^2, \
+    (tau_3 >= tau_1) &mapsto ((a, b) |-> a), \
+    (tau_3 >= tau_2) &mapsto id_(FF^2). \
+  $
+  There is no non-trivial face relation composition in $K$, so $cC$ is easily seen to be a cosheaf.
 
+  We then define morphism $Phi : FK -> cC$ as follows: $Phi_(tau_1) = id_FF$, $Phi_(tau_2) (a) = (a, 0)$ and $Phi_(tau_3) (a) = (a, 0)$. 
+  Since the following diagram commutes 
+// https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQAxDkAX1PUy58hFOQrU6TVuy4A9AEy9+IDNjwEi88TQYs2iThwVKBa4UTLEJu6Qa4mVg9SORirOqfsMPVQjSi13ST0Zbh4JGCgAc3giUAAzACcIAFskABYaHAgkAGYPEIMsKAB9ez4E5LTETJBspABWAtsQYrKw5STUpDE6nMQyYJaACnpSACMASgAfAFoAPnoHLure+sQtIa9RiZmFnanlqsas-s2bL3oAAjn5q53iSaPuxHy+pEGL9jbyzuOa049ZqXG4Le5jR68Sg8IA
+#align(center, commutative-diagram(
+  node-padding: (90pt, 50pt),
+  node((1, 0), [$FF$]),
+  node((1, 1), [$FF^2$]),
+  node((1, 2), [$FF^2,$]),
+  node((0, 0), [$FF$]),
+  node((0, 1), [$FF$]),
+  node((0, 2), [$FF$]),
+  arr((0, 1), (0, 0), [$id_FF$]),
+  arr((0, 1), (0, 2), [$id_FF$]),
+  arr((1, 1), (1, 0), [$(a,b)|->a$]),
+  arr((1, 1), (1, 2), [$id_(FF^2)$]),
+  arr((0, 2), (1, 2), [$a |-> (a,0)$]),
+  arr((0, 0), (1, 0), [$id_FF$]),
+  arr((0, 1), (1, 1), [$a |-> (a,0)$]),
+))
+  we see that $Phi$ is indeed a natural transformation. Further, each component of $Phi$ is injective but $Phi$ is not an isomorphism, so $Phi$ is a strict monomorphism.
+  
+  $K = Delta(1)$, so by @notes[Proposition 2.6], $K$ has the same homology groups with $FK$-coefficients as a single point. We then compute the chain complex of $K$ with $cC$-coefficients: $ bC_0 (K ; cC) = cC(tau_1) plus.circle cC(tau_2) = FF^3, $ $ bC_1 (K ; cC) = cC(tau_3) = FF^2, $ and the only non-trivial boundary map $diff_1^cC$ sends $(a, b)$ to $(a, -a, -b)$. Thus $Ker diff_1^cC = 0$ and $Im diff_1^cC = FF^2$, and thus $bH_0 (K; cC) = FF^3 over FF^2 = FF$ and $bH_1 (K ; cC) = 0$. Finally, since $Phi_0 : bC_0 (K; FK) ->  bC_0 (K; cC)$ is injective, which in particular does not send any generator of $bH_0 (K; FK)$ to zero, the induced map $bH_0 (K; FK) -> bH_0 (K; cC)$ is then necessarily an isomorphism $FF -> FF$. This is the only non-trivial map in $bH_cx (K; FK) -> bH_cx (K; cC)$, which is thus an isomorphism.
 ]
+
+#proposition[
+  For any simplicial complex $K$ and any cosheaf $cC$ over $K$,
+  there does not exist a strict epimorphism $Phi : FK -> cC$ which induces an isomorphism on homology.
+]
+
+#proof[
+  Suppose such $Phi$ exists, then there exists a simplex $tau$ in $K$ such that $Phi_tau : FF -> cC(tau)$ is surjective but is not an isomorphism. Then $Phi_tau$ is necessarily the zero map $FF -> cC(tau) = 0$. 
+
+  We then claim that for any simplex $sigma$ in $K$ such that $tau >= sigma$, $Phi_sigma = 0$ and $cC(sigma) = 0$. By the naturality of $Phi$, the following commutes:
+
+  #align(center, commutative-diagram(
+  node-padding: (70pt, 50pt),
+  node((0, 0), [$FF$]),
+  node((1, 0), [$FF$]),
+  node((0, 1), [$cC(tau)$]),
+  node((1, 1), [$cC(sigma),$]),
+  arr((0, 0), (1, 0), [$id_FF$]),
+  arr((0, 1), (1, 1), [$cC(tau >= sigma)$]),
+  arr((0, 0), (0, 1), [$Phi_tau = 0$]),
+  arr((1, 0), (1, 1), [$Phi_sigma$]),
+))
+  which forces the surjective $Phi_sigma : FF -> cC(sigma)$ to also be the zero map, and thus $cC(sigma) = 0$. 
+  
+  This in particular shows that there must be some vertex $rho = {v}$ such that $Phi_rho = 0$ and $cC(rho) = 0$. Then in the chain map, $Phi_0 : bC_0 (K ; FK) -> bC_0 (K; cC)$ sends $rho$ to $0$. However, $rho$ can be seen as a generator of $bH_0 (K; FK)$, representing the connected component to which $rho$ belongs. Then the induced map $bH_0 (K; FK) -> bH_0 (K; cC)$ on homology would also send the class of $rho$ to $0$ and thus cannot be an isomorphism. We have therefore reached a contradiction.
+]
+
+= Task 4
+
 
 #pagebreak()
 #bibliography("bib.yml")
