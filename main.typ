@@ -265,6 +265,31 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
 
 = Task 4
 
+#definition[
+  Let $cC$ be a cosheaf over a simplicial complex $K$. Then a *filtration* of $K$ of length $l >= 1$ is a collection of cosheaves $ {cC^1, cC^2, ..., cC^l = cC} $ over $K$ together with strict monomorphisms $Psi_i : cC^i -> cC^(i+1)$ for each $i = 1, 2, ..., l-1$. 
+  // We denote such a filtration as 
+  // $
+  //   cC^1 subset cC^2 subset ... subset cC^l = cC.
+  // $
+]
+
+Then for each dimension $k >= 0$, there are induced maps on homology 
+$
+  bH_k (K ; cC^1) ->^(bH_k Psi_1) bH_k (K ; cC^2) ->^(bH_k Psi_2)  ... ->^(bH_k Psi_(l-1)) bH_k (K ; cC^l)
+$
+For any $1 <= i <= j <= l$, we denote $Psi_(i->j) = Psi_(j-1) oo ... oo Psi_i$ (when $i = j$, $Psi_(i -> i) = id_(cC^i)$) and then
+$
+  bH_k Psi_(i->j) = bH_k Psi_(j-1) oo ... oo bH_k Psi_i.
+$
+
+For any $1 <= i <= j <= l$, the *persistent homology* is given by 
+$
+  PH_(i->j)
+$
+#TODO[tomorrow...]
+
+
+
 
 #pagebreak()
 #bibliography("bib.yml")
