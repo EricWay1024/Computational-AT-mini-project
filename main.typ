@@ -77,7 +77,7 @@ Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
 
 #definition[
   Let $V$ be a $FF$-vector space.
-  The *constant* cosheaf $underline(V)_K : (K , >=) -> VF$ is the functor given as follows:  
+  The *constant* cosheaf $underline(V)_K$ is the functor given as follows:  
   $
     underline(V)_K : (K , >=) &-> VF \
     tau &mapsto V \
@@ -266,29 +266,70 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
 = Task 4
 
 #definition[
-  Let $cC$ be a cosheaf over a simplicial complex $K$. Then a *filtration* of $K$ of length $l >= 1$ is a collection of cosheaves $ {cC^1, cC^2, ..., cC^l = cC} $ over $K$ together with strict monomorphisms $Psi_i : cC^i -> cC^(i+1)$ for each $i = 1, 2, ..., l-1$. 
+  Let $cC$ be a cosheaf over a simplicial complex $K$. Then a *filtration* ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ is a collection of cosheaves ${cC^1, cC^2, ..., cC^l = cC} $ over $K$ together with strict monomorphisms $Psi_i : cC^i -> cC^(i+1)$ for each $i = 1, 2, ..., l-1$. 
   // We denote such a filtration as 
   // $
   //   cC^1 subset cC^2 subset ... subset cC^l = cC.
   // $
-]
 
 Then for each dimension $k >= 0$, there are induced maps on homology 
 $
   bH_k (K ; cC^1) ->^(bH_k Psi_1) bH_k (K ; cC^2) ->^(bH_k Psi_2)  ... ->^(bH_k Psi_(l-1)) bH_k (K ; cC^l)
 $
-For any $1 <= i <= j <= l$, we denote $Psi_(i->j) = Psi_(j-1) oo ... oo Psi_i$ (when $i = j$, $Psi_(i -> i) = id_(cC^i)$) and then
+For any $1 <= i <= j <= l$, we denote $Psi_(i->j) = Psi_(j-1) oo ... oo Psi_i$ (when $i = j$, $Psi_(i -> i) = id_(cC^i)$) and by the functoriality of homology,
+$bH_k Psi_(i->j) = bH_k Psi_(j-1) oo ... oo bH_k Psi_i.
 $
-  bH_k Psi_(i->j) = bH_k Psi_(j-1) oo ... oo bH_k Psi_i.
+Then the associated *persistent homology* of $K$ with coefficients in ${cC^i}$ is defined by 
 $
+  PH_(k) Psi_(i->j) = Im(bH_k Psi_(i->j)),
+$
+which is a subspace of $bH_k (K; cC^j)$. 
+]
 
-For any $1 <= i <= j <= l$, the *persistent homology* is given by 
-$
-  PH_(i->j)
-$
-#TODO[tomorrow...]
+#lemma[
+If $cC = FK$, a filtration ${cC^i}$ of $K$ defined as above is the same as a filtration defined as in @notes[Definition 1.6].
+]
+
+#proof[
+  Since all $Phi_i$'s are strict monomorphisms, each $cC^i$ would only assign either $FF$ or $0$ to each simplex in $K$. Also, for any $i$ and any pair $tau >= sigma$, if $cC^i (tau) = FF$, then $Psi_(i->l, tau) = id_FF$ by injectivity, and the naturality of $Psi_(i -> l)$ would ensure that $cC^i (sigma) = FF$ as well. This indicates that for each $i$, the simplices in $K$ to which $cC^i$ assigns $FF$ form a subcomplex of $K$, which can be viewed as $bF_i K$ as in @notes[Definition 1.6]. 
+]
+= Task 5
+The following is based on @notes[Section 8.1].
+
+#definition[
+  A *partial matching* on $K$ is a collection $Sigma$ of simplex-pairs $sigma lt.tri tau$ of $K$ such that each simplex in $K$ only occurs in any of the pairs at most once. 
+]
+#definition[
+  A *$Sigma$-path* is a zigzag sequence of distinct simplices in $K$ of the form 
+  $
+    rho = (sigma_1 lt.tri tau_1 gt.tri sigma_2 lt.tri tau_2 gt.tri ... gt.tri sigma_m lt.tri tau_m ),
+  $
+  where $(sigma_i lt.tri tau_i)$ lies in $Sigma$ for each $i = 1, 2, ..., m$.  Such a $Sigma$-path $rho$ is a *$Sigma$-cycle* if $m > 1$ and $tau_m lt.tri sigma_1$. Any $Sigma$-path which is not a $Sigma$-cycle is a *gradient path*. 
+]
+
+#definition[
+  A partial matching $Sigma$ on $K$ is said to be *acyclic* if there does not exist any $Sigma$-cycle.
+]
 
 
+#definition[
+  Let ${cC^i}$ be a filtration of $cC$ over $K$ of length $l >= 1$. An acyclic partial matching $Sigma$ on $K$ is *compatible* with ${cC^i}$ if for any $1<= i <= l$ and any pair $sigma lt.tri tau$ in $Sigma$, the map $cC^i  (tau >= sigma)$ is an isomorphism.
+]
+#definition[
+  Given an acyclic  partial matching $Sigma$ on $K$ which is compatible with ${cC^i}$,  for each $1 <= i <= l$, a simplex $tau$ in $K$ is said to be a *critical simplex* at stage $i$ if 
+  + $tau$ does not occur in any of the pairs in $Sigma$, and
+  + $cC^i (tau) != 0$.
+]
+
+#example[
+  #TODO[maybe write some code]
+]
+
+= Task 6
+
+#definition[
+
+]
 
 
 #pagebreak()

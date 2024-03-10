@@ -15,6 +15,7 @@
 #let cC = [$cal(C)$]
 #let cD = [$cal(D)$]
 #let bC = [$bold("C")$]
+#let bF = [$bold("F")$]
 #let bH = [$bold("H")$]
 #let PH = [$bold("PH")$]
 #let Im  = [$op("Im")$]
