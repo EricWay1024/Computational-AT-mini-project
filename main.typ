@@ -111,7 +111,12 @@ Now fix a morphism $Phi : cC -> cC'$ of cosheaves.
   $Phi : cC -> cC'$ induces a chain map $bC_cx (K; cC) -> bC_cx (K; cC')$.
 ]
 #proof[
-  For each $k>=0$, write $Phi_k : bC_k (K; cC) -> bC_k (K; cC')$ for the linear map whose $cC(tau) -> cC'(tau')$ component is $Phi_tau$ when $tau = tau'$ and is $0$ otherwise, where $tau$ and $tau'$ are simplices in $K$ such that $dim(tau) = dim(tau') = k$. We claim that ${Phi_k}_(k>=0)$ is a chain map $bC_cx (K; cC) -> bC_cx (K; cC')$, i.e., the following diagram commutes:
+  For each $k>=0$ and any $k$-simplices  $tau$ and $tau'$  in $K$, define $Phi_k : bC_k (K; cC) -> bC_k (K; cC')$ as the linear map whose $cC(tau) -> cC'(tau')$ component is 
+  $
+    cases(Phi_tau quad & tau = tau' comma, 
+    0 quad &  "otherwise".)
+  $
+  We claim that ${Phi_k}_(k>=0)$ is a chain map $bC_cx (K; cC) -> bC_cx (K; cC')$, i.e., the following diagram commutes:
 
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAGEB9AawAIAKANIBuXgGN2AShABfUuky58hFAEZyVWoxZsu-bgFpVkgSPFTZ8kBmx4CRMqs31mrRBx6nREgOTS5CrbKROpO1C467nqGxl7mfrKaMFAA5vBEoABmAE4QALZIZCA4EEgATOHabiAACgAWWDyWWbkFiOrFpYgAzJWubPWN+kb+Vjn5hdQlSB0R1VBYmZk8AHoSzSDjbRWdSL1a-e4LS6v8vv4UMkA
 #align(center, commutative-diagram(
@@ -200,7 +205,7 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
   Thus $FK$ does not have the homology of a single point, but $cC$ does. 
 ]
 
-#TODO[what is strict monomorphism? each component is injective or some component is injective?]
+// #TODO[what is strict monomorphism? each component is injective or some component is injective?]
 
 #example[
   Let $V = {v_1, v_2}$ and $K = {tau_1, tau_2, tau_3}$, where $tau_1 = {v_1}$, $tau_2 = {v_2}$ and $tau_3 = {v_1, v_2}$. (In other words, $K = Delta(1)$.) Define cosheaf $cC$  as follows: 
@@ -266,7 +271,7 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
 = Task 4
 
 #definition[
-  Let $cC$ be a cosheaf over a simplicial complex $K$. Then a *filtration* ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ is a collection of cosheaves ${cC^1, cC^2, ..., cC^l = cC} $ over $K$ together with strict monomorphisms $Psi_i : cC^i -> cC^(i+1)$ for each $i = 1, 2, ..., l-1$. 
+  Let $cC$ be a cosheaf over a simplicial complex $K$. Then a *filtration* ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ is a collection of cosheaves ${cC^1, cC^2, ..., cC^l = cC} $ over $K$ together with strict monomorphisms $Psi^i : cC^i -> cC^(i+1)$ for each $i = 1, 2, ..., l-1$. 
   // We denote such a filtration as 
   // $
   //   cC^1 subset cC^2 subset ... subset cC^l = cC.
@@ -274,14 +279,14 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
 
 Then for each dimension $k >= 0$, there are induced maps on homology 
 $
-  bH_k (K ; cC^1) ->^(bH_k Psi_1) bH_k (K ; cC^2) ->^(bH_k Psi_2)  ... ->^(bH_k Psi_(l-1)) bH_k (K ; cC^l)
+  bH_k (K ; cC^1) ->^(bH_k Psi^1) bH_k (K ; cC^2) ->^(bH_k Psi^2)  ... ->^(bH_k Psi^(l-1)) bH_k (K ; cC^l)
 $
-For any $1 <= i <= j <= l$, we denote $Psi_(i->j) = Psi_(j-1) oo ... oo Psi_i$ (when $i = j$, $Psi_(i -> i) = id_(cC^i)$) and by the functoriality of homology,
-$bH_k Psi_(i->j) = bH_k Psi_(j-1) oo ... oo bH_k Psi_i.
+For any $1 <= i <= j <= l$, we denote $Psi^(i->j) = Psi^(j-1) oo ... oo Psi^i$ (when $i = j$, $Psi^(i -> i) = id_(cC^i)$) and by the functoriality of homology,
+$bH_k Psi^(i->j) = bH_k Psi^(j-1) oo ... oo bH_k Psi^i.
 $
 Then the associated *persistent homology* of $K$ with coefficients in ${cC^i}$ is defined by 
 $
-  PH_(k) Psi_(i->j) = Im(bH_k Psi_(i->j)),
+  PH_(k) Psi^(i->j) = Im(bH_k Psi^(i->j)),
 $
 which is a subspace of $bH_k (K; cC^j)$. 
 ]
@@ -291,20 +296,20 @@ If $cC = FK$, a filtration ${cC^i}$ of $K$ defined as above is the same as a fil
 ]
 
 #proof[
-  Since all $Phi_i$'s are strict monomorphisms, each $cC^i$ would only assign either $FF$ or $0$ to each simplex in $K$. Also, for any $i$ and any pair $tau >= sigma$, if $cC^i (tau) = FF$, then $Psi_(i->l, tau) = id_FF$ by injectivity, and the naturality of $Psi_(i -> l)$ would ensure that $cC^i (sigma) = FF$ as well. This indicates that for each $i$, the simplices in $K$ to which $cC^i$ assigns $FF$ form a subcomplex of $K$, which can be viewed as $bF_i K$ as in @notes[Definition 1.6]. 
+  Since all $Phi_i$'s are strict monomorphisms, each $cC^i$ would only assign either $FF$ or $0$ to each simplex in $K$. Also, for any $i$ and any pair $tau >= sigma$, if $cC^i (tau) = FF$, then $Psi^(i->l)_(tau) = id_FF$ by injectivity, and the naturality of $Psi^(i -> l)$ would ensure that $cC^i (sigma) = FF$ as well. This indicates that for each $i$, the simplices in $K$ to which $cC^i$ assigns $FF$ form a subcomplex of $K$, which can be viewed as $bF_i K$ as in @notes[Definition 1.6]. 
 ]
 = Task 5
 The following is based on @notes[Section 8.1].
 
 #definition[
-  A *partial matching* on $K$ is a collection $Sigma$ of simplex-pairs $sigma lt.tri tau$ of $K$ such that each simplex in $K$ only occurs in any of the pairs at most once. 
+  A *partial matching* on $K$ is a collection $Sigma$ of simplex-pairs $sigma lt.tri tau$ of $K$ such that each simplex in $K$ only occurs in any of the pairs at most once. A simplex in $K$ is said to be a *critical simplex* if it does not occur in any of the pairs in $Sigma$.
 ]
 #definition[
   A *$Sigma$-path* is a zigzag sequence of distinct simplices in $K$ of the form 
   $
     rho = (sigma_1 lt.tri tau_1 gt.tri sigma_2 lt.tri tau_2 gt.tri ... gt.tri sigma_m lt.tri tau_m ),
   $
-  where $(sigma_i lt.tri tau_i)$ lies in $Sigma$ for each $i = 1, 2, ..., m$.  Such a $Sigma$-path $rho$ is a *$Sigma$-cycle* if $m > 1$ and $tau_m lt.tri sigma_1$. Any $Sigma$-path which is not a $Sigma$-cycle is a *gradient path*. 
+  where $(sigma_j lt.tri tau_j)$ lies in $Sigma$ for each $j = 1, 2, ..., m$.  Such a $Sigma$-path $rho$ is a *$Sigma$-cycle* if $m > 1$ and $tau_m lt.tri sigma_1$. Any $Sigma$-path which is not a $Sigma$-cycle is a *gradient path*. 
 ]
 
 #definition[
@@ -315,11 +320,11 @@ The following is based on @notes[Section 8.1].
 #definition[
   Let ${cC^i}$ be a filtration of $cC$ over $K$ of length $l >= 1$. An acyclic partial matching $Sigma$ on $K$ is *compatible* with ${cC^i}$ if for any $1<= i <= l$ and any pair $sigma lt.tri tau$ in $Sigma$, the map $cC^i  (tau >= sigma)$ is an isomorphism.
 ]
-#definition[
-  Given an acyclic  partial matching $Sigma$ on $K$ which is compatible with ${cC^i}$,  for each $1 <= i <= l$, a simplex $tau$ in $K$ is said to be a *critical simplex* at stage $i$ if 
-  + $tau$ does not occur in any of the pairs in $Sigma$, and
-  + $cC^i (tau) != 0$.
-]
+// #definition[
+//   Given an acyclic partial matching $Sigma$ on $K$ which is compatible with ${cC^i}$,  for each $1 <= i <= l$, a simplex $tau$ in $K$ is said to be a *critical simplex* if $tau$ does not occur in any of the pairs in $Sigma$.
+//   // + $cC^i (tau) != 0$.
+// ]
+// #TODO[is this a helpful definition ? do we want to omit definition (2)?]
 
 #example[
   #TODO[maybe write some code]
@@ -327,8 +332,247 @@ The following is based on @notes[Section 8.1].
 
 = Task 6
 
-#definition[
+Fix a filtration ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ and  an acyclic matching $Sigma$ on $K$ compatible with ${cC^i}$. Until further notice, also fix $i$ such that $1<= i<= l$.
 
+#definition[
+  Define $cC^i_(alpha, beta) : cC(alpha) -> cC(beta)$ as 
+  $
+    cC^i_(alpha, beta) = [beta : alpha] dot cC^i (alpha >= beta) = cases(
+      + cC^i (alpha >= beta) quad & beta = alpha_(-j) "for even " j comma ,
+      - cC^i (alpha >= beta) quad & beta = alpha_(-j) "for odd " j comma , 
+      0 quad & "otherwise." 
+    )
+  $
+  ]
+  #definition[
+  For a $Sigma$-path
+     $
+    rho = (sigma_1 lt.tri tau_1 gt.tri sigma_2 lt.tri tau_2 gt.tri ... gt.tri sigma_m lt.tri tau_m ),
+  $
+  define its *$cC^i$-weight* $w_(cC^i)(rho)$ as the linear map $cC^i (sigma_1) -> cC^i (tau_m)$ given by 
+  $
+    w_(cC^i)(rho) := (-1)^m dot (cC_(tau_m, sigma_m)^i)^(-1) oo ... oo (cC_(tau_2, sigma_2)^i)^(-1) oo cC_(tau_1, sigma_2)^i oo (cC_(tau_1, sigma_1)^i)^(-1).
+  $
+]
+#remark[
+  Since $cC^i_(tau_j, sigma_j) = plus.minus cC^i (tau_j >= sigma_j)$ for each $1 <= i <= l$ and $1 <=  j <= m$ is by definition an isomorphism, taking its inverse is justified.
+]
+
+#definition[
+  The *Morse complex* of $Sigma$ with coefficients in $cC^i$ is a sequence 
+  $
+    (bC_cx^Sigma (K; cC^i), d_cx ^(cC^i, Sigma) ),
+  $
+  where for each dimension $k >= 0$,
+  $
+    bC_k^Sigma (K; cC^i) = product_(dim alpha = k comma \ alpha "critical ") cC^i (alpha),
+  $
+  and for critical simplices $alpha, beta$ in $K$ with $dim alpha = k$ and $dim beta = k-1$, 
+  $d_k ^(cC^i, Sigma) : bC_k^Sigma (K; cC^i) -> bC_(k-1)^Sigma (K; cC^i)$  has the following $cC^i (alpha) -> cC^i (beta)$ component:
+  $
+    d_k ^(cC^i, Sigma)|_(alpha, beta) = cC^i_(alpha, beta) + sum_(Sigma"-path" rho = (sigma lt.tri ... lt.tri tau)) cC^i_(tau, beta) oo w_(cC^i)(rho) oo cC^i_(alpha, sigma).
+  $
+]
+#notation[
+  As the notations get visibly messy,
+  from now on, with $K$, ${cC^i}$ and $Sigma$ fixed as above, for each $1 <= i <= l$ and each dimension $k >=0$, 
+  denote $ bC_k^i := bC_k (K ; cC^i) comma quad diff_k^i := diff_k^(cC^i) comma \ 
+  bM_k^i  := bC_k^Sigma (K; cC^i), quad  d_k^i := d_k^(cC^i, Sigma) . $ 
+  We also denote $w_i (rho) := w_(cC^i) (rho)$ for any $Sigma$-path $rho$.
+]
+#proposition[
+  For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is a chain complex.
+]
+#let ci(s, t) = [$cC^i_(#s, #t)$] 
+#proof[
+  This is analogous to @notes[Proposition 8.8]. To elaborate, it suffices by induction to consider when $Sigma = {(sigma lt.tri tau)}$, the set of critical simplices $C_Sigma = K - {sigma, tau}$, and the only $Sigma$-path $rho = (sigma lt.tri tau)$. Then we need to show that for each $k >= 2$, for any $alpha, omega in C_Sigma$ such that $dim alpha = dim omega + 2 = k$, we have $ B := sum_(dim xi = k - 1 comma \ xi in C_Sigma) d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi) = 0. $
+  For each $xi$ in the sum, denote $B_xi := d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi)$, which by definition expands to 
+  $
+    B_xi = 
+    underbrace( ci(xi, omega) oo ci(alpha, xi), B_(xi, 1))
+    underbrace(- ci(tau, omega) oo (ci(tau, sigma))^(-1) oo ci(xi, sigma) oo ci(alpha, xi) , B_(xi, 2))
+    underbrace(
+    -ci(xi, omega) oo ci(tau, xi) oo (ci(tau, sigma))^(-1) oo ci(alpha, sigma), 
+    B_(xi, 3)) \ + ci(tau, omega) oo (ci(tau, sigma))^(-1) oo ci(xi, sigma) oo ci(tau, xi) oo (ci(tau, sigma))^(-1) oo ci(alpha, sigma),
+  $
+  where the fourth term is always zero, since $ci(alpha, sigma) != 0$ only if $dim sigma = k-1$, but $ci(xi, sigma) != 0$ only if $dim sigma = k-2$. Now denote the first three terms of $B_xi$ as $B_(xi, j)$ for $j = 1, 2, 3$ respectively, so $B_xi = sum_(j=1)^3 B_(xi, j)$. Since $diff^i_cx$ is a boundary operator, we have $ sum_xi B_(xi, 1) = - ci(tau, omega) oo ci(alpha, tau) -  ci(sigma, omega) oo ci(alpha, sigma). $
+  We then see that $sum_xi B_(xi, j) = 0$ for any $j = 1, 2, 3$ if $dim sigma != k - 2$ and $dim sigma != k-1$. Then there remain two cases:
+  - If $dim sigma = k-2$ and so $dim tau = k -1$, then $B_(xi, 3) = 0$ for any $xi$ in the sum, and $ sum_xi B_(xi, 2) =  ci(tau, omega) oo (ci(tau, sigma))^(-1) oo ci(tau, sigma) oo ci(alpha, tau) =  ci(tau, omega) oo ci(alpha, tau), $
+    which would cancel with $sum_xi B_(xi, 1)$;
+  - If $dim sigma = k -1$, the situation is similar as above, with $B_(xi, 2) = 0$ for any $xi$ and also $sum_xi B_(xi, 3) $ cancelling with $sum_xi B_(xi, 1) $.
+  Therefore, we conclude that $B = sum_xi B_xi = 0$ as desired.
+]
+
+#proposition[
+  For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is chain homotopy equivalent to the chain complex $(bC_cx^i, diff^i_cx)$.
+]
+#proof[
+  This is analogous to @notes[Proposition 8.10] and @notes[Lemma 8.11]. We first consider the case when $Sigma = {(sigma lt.tri tau)}$. For each $k >= 0$ and for each pair of $k$-simplices $(alpha, omega) in K times C_Sigma$, define the $cC^i  (alpha) -> cC^i (omega)$ component of the linear map $psi^i_k : bC_k^i -> bM_k ^i$  by 
+  $
+    psi^i_k |_(alpha, omega) = cases(
+      id_(cC^i (alpha)) quad & alpha = omega != tau comma, 
+      - ci(tau, omega) oo (ci(tau, sigma))^(-1) quad & alpha = sigma comma , 
+      0 & "otherwise".
+    ) 
+  $
+  Conversely, define the $cC^i (omega) -> cC^i (alpha)$ component of the linear map $phi^i _k : bM_k ^i -> bC_k ^i$ by 
+  #math.equation(block: true, numbering: "(1)", supplement: "Equation",
+  $
+    phi^i_k |_(omega, alpha) = cases(
+      id_(cC^i (omega)) quad & omega =  alpha != sigma comma, 
+      -  (ci(tau, sigma))^(-1) oo ci(omega, sigma)   quad & alpha= tau comma , 
+      0 & "otherwise".
+    )
+  $) <def-phi>
+  
+  We can verify that $psi^i_cx$ and $phi^i_cx$ are two chain maps. #TODO[...] 
+  
+  We then note that $psi^i_k oo phi^i_k$ is the identity map on $bM^i_k$. Indeed, for each $omega, omega' in bM_k^i$, 
+  $
+    (psi^i_k oo phi^i_k)|_(omega, omega') = sum_(alpha in bC_k^i) psi^i_k |_(alpha, omega') oo phi^i_k |_(omega, alpha).
+  $
+  If $alpha = sigma$, then $phi^i_k |_(omega, alpha) = 0$. If $alpha = tau$, then $psi^i_k |_(alpha, omega') = 0$. Thus we only need to consider the case when $alpha in.not {tau, sigma}$. Then we see that if $omega != omega'$, one of $psi^i_k |_(alpha, omega')$ and $ phi^i_k |_(omega, alpha)$ must be $0$; if $omega = omega'$, we have $psi^i_k |_(alpha, omega') oo phi^i_k |_(omega, alpha) = id_(cC^i (omega))$ only if $alpha = omega = omega'$. 
+
+  Similarly, we can find that for each $alpha, alpha' in bC_k^i$, 
+  $
+    (phi^i_k oo psi^i_k)|_(alpha, alpha') = cases(
+      - ci(tau, alpha') oo (ci(tau, sigma))^(-1) quad & alpha = tau != alpha' comma, 
+      - (ci(tau, sigma))^(-1) oo ci(alpha, sigma) quad & alpha != sigma = alpha' comma,
+      id_(cC^i (alpha)) quad & alpha = alpha' comma , 
+      0 quad & "otherwise".  
+    )
+  $
+  Then the linear maps $theta_k : bC_k^i -> bC_(k+1)^i$, whose $cC(alpha) -> cC(beta)$ component for $k$-simplex $alpha$ and $(k+1)$-simplex $beta$ is defined as 
+  $
+    theta_k |_(alpha, beta) = cases(
+      (ci(tau, sigma))^(-1) quad & alpha = sigma "and" beta = tau comma, 
+      0 quad & "otherwise" comma
+    )
+  $
+  gives a chain homotopy between $phi^i_k oo psi^i_k$ and the identity chain map on $bC_k^i$.
+
+  Then to move on to general cases of $Sigma$, the discussion at the end of @notes[Section 8.3] also applies with slight modification. 
+  // #TODO[do we want to write more?]
+]
+#corollary[
+  For each $i$ and each dimension $k>=0$, $phi^i_k$ induces an isomorphism from  $bH_k (bM^i_cx)$ to $bH_k (bC^i_cx)$.
+]
+
+#figure(caption: "The commutative cube.")[
+// https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGsA9AFYgAvqXSZc+QijIBGKrUYs2XbgApeAajkBKIaPEgM2PASIAmcovrNWiDj00796wbsMTT0y6QXVbFQc1Zz1+NxdPY0kzGWQ5UgsbZXsOAFkNXld3KJMpcxQAZkTku1UM0OyPMS98uITC0qD0zJdwnJro7wLkYsaAlPLWsIi9UUUYKABzeCJQADMAJwgAWyQEkBwIJDIlMocoLHn54f1hTqXVneotpCs95oAFbD4DC+W1xA3bxGKH1OeWFObyMl0+fx+90CqUOx2Bo2qoI+SAALDdtogAKwDfabLAMWDqQG6V7nJFXRAANnRSAA7DjmngCTAidgSZUQQtkVSaYg0f82EzCbD5uztGFhNQGHR2DAGI8Yj4HIssFMABY4KJgum87EChxClkisVtBEgKUyuUK7oyEAq9Wa94U-k-XY4Oj4thqiAQXha7nUzYY74ehhen1+p2fPWQm6h8O+-0U+lBpAQ+MOb2JkQUERAA
+#align(center, commutative-diagram(
+  node-padding: (50pt, 50pt),
+  node((0, 0), [$bC_(k-1)^i$]),
+  node((1, 0), [$bC_(k)^i$]),
+  node((0, 2), [$bC_(k-1)^(i+1)$]),
+  node((1, 2), [$bC_(k)^(i+1)$]),
+  node((2, 1), [$bM_(k-1)^(i)$]),
+  node((2, 3), [$bM_(k-1)^(i+1)$]),
+  node((3, 1), [$bM_(k)^(i)$]),
+  node((3, 3), [$bM_(k)^(i+1)$]),
+  arr((1, 0), (0, 0), [$diff_(k)^i$]),
+  arr((0, 0), (0, 2), [$Psi_(k-1)^i$]),
+  arr((1, 0), (1, 2), [$Psi_(k)^i$]),
+  arr((1, 2), (0, 2), [$diff_(k)^(i+1)$]),
+  arr((2, 1), (2, 3), [$tilde(Psi)_(k-1)^i$]),
+  arr((3, 1), (3, 3), [$tilde(Psi)_(k)^i$]),
+  arr((3, 1), (2, 1), [$d_(k)^i$], label-pos: right),
+  arr((3, 3), (2, 3), [$d_(k)^(i+1)$], label-pos: right),
+  arr((2, 1), (0, 0), [$phi_(k-1)^i$], label-pos: left, ),
+  arr((3, 1), (1, 0), [$phi_(k)^i$], ),
+  arr((2, 3), (0, 2), [$phi_(k-1)^(i+1)$], label-pos: right),
+  arr((3, 3), (1, 2), [$phi_(k)^(i+1)$]),
+))
+]
+<cube>
+In @cube, we have shown that back face commutes, since each $Psi^i_cx$ is a chain map, and the left face (as well as the right face) commutes, since each $phi_cx^i$ is a chain map. 
+To show the commutativity of the remaining faces,
+now we consider what happens when we vary $i$, the stage of the filtration. 
+
+#proposition[
+  Each $Psi^i : cC^i -> cC^(i+1)$ induces a chain map $ tilde(Psi)^i_cx : bM_cx^i -> bM_cx^(i+1). $ In other words,  the front face of @cube commutes.
+]
+<front-commute>
+#proof[
+  For each dimension $k >= 0$,
+  for an arbitrary pair of critical $k$-simplices $alpha, alpha'$, define the $cC^i  (alpha) -> cC^(i+1) (alpha')$ component of the linear map $tilde(Psi)^i_k : bM_k^i -> bM_k^(i+1)$ as 
+  $
+    cases(
+      Psi^i_alpha quad & alpha = alpha' comma , 
+      0 quad & "otherwise".
+    )
+  $
+  Then it suffices to show for any critical $k$-simplex $alpha$ and critical $(k-1)$-simplex $beta$, 
+  $
+    d_k^(i+1) |_(alpha, beta) oo Psi_alpha^i = Psi_beta^i oo d_k^(i) |_(alpha, beta),
+  $
+  which by definition expands  to 
+  #math.equation(block: true, numbering: "(1)", supplement: "Equation",
+  $
+         (cC^(i+1)_(alpha, beta) + sum_(Sigma"-path" rho = (sigma lt.tri ... lt.tri tau)) cC^(i+1)_(tau, beta) oo w_(i+1)(rho) oo cC^(i+1)_(alpha, sigma)) oo 
+Psi_alpha^i = \ Psi_beta^i oo
+(        cC^i_(alpha, beta) + sum_(Sigma"-path" rho = (sigma lt.tri ... lt.tri tau)) cC^i_(tau, beta) oo w_(i)(rho) oo cC^i_(alpha, sigma)).
+  $) <eq1>
+  
+  
+
+   Notice that for any simplices $delta >= gamma$ in $K$, by the naturality of $Psi^i$, we have 
+   $cC^(i+1) (delta >= gamma) oo Psi^i_(delta) = Psi^i_(gamma) oo cC^i (delta >= gamma)$. Hence, for an arbitrary pair of simplices $ delta, gamma$ in $K$,
+   #math.equation(block: true, numbering: "(1)", supplement: "Equation",
+   $ cC^(i+1) _(delta, gamma) oo Psi^i_(delta) = Psi^i_(gamma) oo cC^i_ (delta , gamma). $ ) <eq2>
+
+   In particular, if $(gamma lt.tri delta) in Sigma$, then by compatibility, both $cC^(i+1) _(delta, gamma)$ and $cC^i_ (delta , gamma)$ are isomorphisms, and we have #math.equation(block: true, numbering: "(1)", supplement: "Equation",
+   $
+        (cC^(i+1) _(delta, gamma))^(-1) oo Psi^i_(gamma) = Psi^i_(delta) oo (cC^i_ (delta , gamma))^(-1). 
+   $) <eq3>
+   
+  Finally, note that each $w_(i+1) (rho)$ consists of nothing but compositions of $cC^(i+1) _(ast, ast)$ or its inverse, apart from a sign.
+  So for each summand on the LHS of @eq1, we can imagine passing $Psi_alpha^i$ step-by-step from right to left using @eq2 or @eq3, changing the superscript $(i+1)$ to $i$ at each step, and eventually $Psi_alpha^i$ becomes $Psi_beta^i$ on the far left, which is exactly a corresponding summand on the RHS of @eq1.
+]
+
+#proposition[
+  The bottom face (hence as well as the top face) of @cube commutes. 
+]
+#proof[
+  By induction, it suffices to consider $Sigma = {(sigma lt.tri tau)}$.
+  It then suffices to show for any critical $k$-simplex $omega$ and any $k$-simplex $alpha$ that 
+  $
+   phi_k^(i+1) |_(omega, alpha) oo Psi_omega^i = Psi_alpha^i oo phi_k^i |_(omega, alpha).
+  $
+  Expand the above using @def-phi, and the proof for @front-commute would also work, again thanks to the naturality of $Psi^i$.
+]
+
+#theorem[
+  For each $k >= 0$, $bC_k^cx$ and $bM_k^cx$ induce the same persistent homology.
+]
+#proof[
+  We have shown that @cube commutes. In other words, in the category of chain complexes, we have the following commutative diagram: 
+// https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGMAPAHpYQAX1LpMufIRQBGclVqMWbLnyEAKLAGo5ASjESQGbHgJEycpfWatEHALIbhRyWZlEF16rdUP2ZwFBbT1DUSUYKABzeCJQADMAJwgAWyQyEBwIJAVlOzYABWxhDTcQZLSkACZqbKQAZl8VeyysBlhNYqx9UoFyyvTEWqycxEy-VrQACywXEXFElKGm0dzmgocZueDQgzEKUSA
+#align(center, commutative-diagram(
+  node-padding: (50pt, 50pt),
+  node((0, 0), [$bC_cx^i$]),
+  node((0, 1), [$bC_cx^(i+1)$]),
+  node((1, 0), [$bM_cx^i$]),
+  node((1, 1), [$bM_cx^(i+1).$]),
+  arr((0, 0), (0, 1), [$Psi^i_cx$]),
+  arr((1, 0), (1, 1), [$tilde(Psi)^i_cx$]),
+  arr((1, 0), (0, 0), [$phi_cx^i$]),
+  arr((1, 1), (0, 1), [$phi_cx^(i+1)$]),
+))
+By the functoriality of homology, for each dimension $k >= 0$, we have the following commutative diagram:
+// https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMAJAfQGsACABQBjAMIA9LAEoQAX1LpMufIRQBGclVqMWbLn0HsJgrAGo1UmfMXY8BImTVb6zVog48BhgLKSrCkAxbFSINJ2oXXXd9L3ZfE3NLOS0YKABzeCJQADMAJwgAWyQyEBwIJA1tVz1PfgAFbEk5ALzCpAAmajKkAGYInTcPPn48BlhBBukm6xBWosRO0vLEEsjBmP40AAssaZb8+b6liv7q6Nrt3YSLZNkgA
+#align(center, commutative-diagram(
+  node-padding: (50pt, 50pt),
+  node((0, 0), [$bH_k (bC^i)$]),
+  node((0, 1), [$bH_k (bC^(i+1))$]),
+  node((1, 0), [$bH_k (bM^i)$]),
+  node((1, 1), [$bH_k (bM^(i+1)).$]),
+  arr((0, 0), (0, 1), [$bH_k Psi^i$]),
+  arr((1, 0), (1, 1), [$bH_k tilde(Psi)^i$]),
+  arr((1, 0), (0, 0), [$bH_k phi^i$]),
+  arr((1, 1), (0, 1), [$bH_k phi^(i+1)$], label-pos: right),
+))
+We have shown that each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i$ would have an isomorphic image as $bH_k Psi^i$. So we are done.
 ]
 
 

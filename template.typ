@@ -14,9 +14,10 @@
 #let FVR = [$bold("FinVec")_RR$]
 #let cC = [$cal(C)$]
 #let cD = [$cal(D)$]
-#let bC = [$bold("C")$]
-#let bF = [$bold("F")$]
-#let bH = [$bold("H")$]
+#let bC = [$upright(bold("C"))$]
+#let bM = [$upright(bold("M"))$]
+#let bF = [$upright(bold("F"))$]
+#let bH = [$upright(bold("H"))$]
 #let PH = [$bold("PH")$]
 #let Im  = [$op("Im")$]
 #let Ker  = [$op("Ker")$]
@@ -84,6 +85,8 @@
   "Remark",
   breakable: true,
   separator: [#h(0em).#h(0.2em)],
+  inset: 0em,
+
 )
 
 #let notation = thmplain(
@@ -91,6 +94,8 @@
   "Notation",
   breakable: true,
   separator: [#h(0em).#h(0.2em)],
+  inset: 0em,
+
 )
 
 #let corollary = thmbox(
