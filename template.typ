@@ -30,7 +30,7 @@
   separator: [#h(0em).#h(0.2em)],
   padding: (top: 0.2em, bottom: 0.2em),
   inset: 0em,
-  base_level: 1,
+  base_level: 0,
 )
 
 #let thmboxparams2 = (
@@ -86,7 +86,7 @@
   breakable: true,
   separator: [#h(0em).#h(0.2em)],
   inset: 0em,
-
+  base_level: 0,
 )
 
 #let notation = thmplain(
@@ -95,7 +95,7 @@
   breakable: true,
   separator: [#h(0em).#h(0.2em)],
   inset: 0em,
-
+  base_level: 0,
 )
 
 #let corollary = thmbox(
