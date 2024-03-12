@@ -425,8 +425,8 @@ Fix a filtration ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ and  an acyclic ma
     )
   $) <def-phi>
   
-  We can verify that $psi^i_cx$ and $phi^i_cx$ are two chain maps. #TODO[...] 
-  
+  One can verify that $psi^i_cx$ and $phi^i_cx$ are two chain maps.
+  //  #TODO[...] 
   We then note that $psi^i_k oo phi^i_k$ is the identity map on $bM^i_k$. Indeed, for each $omega, omega' in bM_k^i$, 
   $
     (psi^i_k oo phi^i_k)|_(omega, omega') = sum_(alpha in bC_k^i) psi^i_k |_(alpha, omega') oo phi^i_k |_(omega, alpha).
@@ -457,6 +457,9 @@ Fix a filtration ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ and  an acyclic ma
 #corollary[
   For each $i$ and each dimension $k>=0$, $phi^i_k$ induces an isomorphism from  $bH_k (bM^i_cx)$ to $bH_k (bC^i_cx)$.
 ]
+<iso-homo>
+
+We now introduce a useful (and beautiful) diagram:
 
 #figure(caption: "The commutative cube.")[
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGsA9AFYgAvqXSZc+QijIBGKrUYs2XbgApeAajkBKIaPEgM2PASIAmcovrNWiDj00796wbsMTT0y6QXVbFQc1Zz1+NxdPY0kzGWQ5UgsbZXsOAFkNXld3KJMpcxQAZkTku1UM0OyPMS98uITC0qD0zJdwnJro7wLkYsaAlPLWsIi9UUUYKABzeCJQADMAJwgAWyQEkBwIJDIlMocoLHn54f1hTqXVneotpCs95oAFbD4DC+W1xA3bxGKH1OeWFObyMl0+fx+90CqUOx2Bo2qoI+SAALDdtogAKwDfabLAMWDqQG6V7nJFXRAANnRSAA7DjmngCTAidgSZUQQtkVSaYg0f82EzCbD5uztGFhNQGHR2DAGI8Yj4HIssFMABY4KJgum87EChxClkisVtBEgKUyuUK7oyEAq9Wa94U-k-XY4Oj4thqiAQXha7nUzYY74ehhen1+p2fPWQm6h8O+-0U+lBpAQ+MOb2JkQUERAA
@@ -485,7 +488,7 @@ Fix a filtration ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ and  an acyclic ma
 ))
 ]
 <cube>
-In @cube, we have shown that back face commutes, since each $Psi^i_cx$ is a chain map, and the left face (as well as the right face) commutes, since each $phi_cx^i$ is a chain map. 
+In @cube, we have shown that back face commutes, since each $Psi^i_cx$ is a chain map; the left face (as well as the right face) commutes, since each $phi_cx^i$ is a chain map; and furthermore, each slant arrow $phi^i_k$ induces an isomorphism on homology.
 To show the commutativity of the remaining faces,
 now we consider what happens when we vary $i$, the stage of the filtration. 
 
@@ -572,9 +575,8 @@ By the functoriality of homology, for each dimension $k >= 0$, we have the follo
   arr((1, 0), (0, 0), [$bH_k phi^i$]),
   arr((1, 1), (0, 1), [$bH_k phi^(i+1)$], label-pos: right),
 ))
-We have shown that each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i$ would have an isomorphic image as $bH_k Psi^i$. So we are done.
+By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i$ would have an isomorphic image as $bH_k Psi^i$. So we are done.
 ]
 
 
-#pagebreak()
 #bibliography("bib.yml")
