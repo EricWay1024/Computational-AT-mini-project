@@ -168,12 +168,10 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
 ]
 #proof[
   We need to check that $Phi^(-1)$ is indeed a natural transformation. For each pair $tau >= sigma$, the naturality of $Phi$ says that 
-  $
-    cC' (tau >= sigma) oo Phi_tau = Phi_sigma oo cC (tau >= sigma).
+  $cC' (tau >= sigma) oo Phi_tau = Phi_sigma oo cC (tau >= sigma).
   $
   Hence 
-  $
-    (Phi_sigma)^(-1) oo cC' (tau >= sigma)  =   cC (tau >= sigma) oo (Phi_tau)^(-1),
+  $(Phi_sigma)^(-1) oo cC' (tau >= sigma)  =   cC (tau >= sigma) oo (Phi_tau)^(-1),
   $
   which shows the naturality of $Phi^(-1)$. 
 ]
@@ -360,8 +358,7 @@ Fix a filtration ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ and  an acyclic ma
 
 #definition[
   The *Morse complex* of $Sigma$ with coefficients in $cC^i$ is a sequence 
-  $
-    (bC_cx^Sigma (K; cC^i), d_cx ^(cC^i, Sigma) ),
+  $(bC_cx^Sigma (K; cC^i), d_cx ^(cC^i, Sigma) ),
   $
   where for each dimension $k >= 0$,
   $
@@ -488,12 +485,12 @@ We now introduce a useful (and beautiful) diagram:
 ))
 ]
 <cube>
-In @cube, we have shown that back face commutes, since each $Psi^i_cx$ is a chain map; the left face (as well as the right face) commutes, since each $phi_cx^i$ is a chain map; and furthermore, each slant arrow $phi^i_k$ induces an isomorphism on homology.
+In @cube, we have shown that the back face commutes, since each $Psi^i_cx$ is a chain map; the left face (as well as the right face) commutes, since each $phi_cx^i$ is a chain map; and furthermore, each slant arrow $phi^i_k$ induces an isomorphism on homology.
 To show the commutativity of the remaining faces,
 now we consider what happens when we vary $i$, the stage of the filtration. 
 
 #proposition[
-  Each $Psi^i : cC^i -> cC^(i+1)$ induces a chain map $ tilde(Psi)^i_cx : bM_cx^i -> bM_cx^(i+1). $ In other words,  the front face of @cube commutes.
+  Each $Psi^i : cC^i -> cC^(i+1)$ induces a chain map $tilde(Psi)^i_cx : bM_cx^i -> bM_cx^(i+1). $ In other words,  the front face of @cube commutes.
 ]
 <front-commute>
 #proof[
@@ -539,10 +536,9 @@ Psi_alpha^i = \ Psi_beta^i oo
 #proof[
   By induction, it suffices to consider $Sigma = {(sigma lt.tri tau)}$.
   It then suffices to show for any critical $k$-simplex $omega$ and any $k$-simplex $alpha$ that 
+  $phi_k^(i+1) |_(omega, alpha) oo Psi_omega^i = Psi_alpha^i oo phi_k^i |_(omega, alpha).
   $
-   phi_k^(i+1) |_(omega, alpha) oo Psi_omega^i = Psi_alpha^i oo phi_k^i |_(omega, alpha).
-  $
-  Expand the above using @def-phi, and the proof for @front-commute would also work, again thanks to the naturality of $Psi^i$.
+  Expand this using @def-phi, and the proof for @front-commute would also work, again thanks to the naturality of $Psi^i$.
 ]
 
 #theorem[
@@ -562,21 +558,22 @@ Psi_alpha^i = \ Psi_beta^i oo
   arr((1, 0), (0, 0), [$phi_cx^i$]),
   arr((1, 1), (0, 1), [$phi_cx^(i+1)$]),
 ))
-By the functoriality of homology, for each dimension $k >= 0$, we have the following commutative diagram:
+By the functoriality of homology, for each dimension $k >= 0$, the following commutes:
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMAJAfQGsACABQBjAMIA9LAEoQAX1LpMufIRQBGclVqMWbLn0HsJgrAGo1UmfMXY8BImTVb6zVog48BhgLKSrCkAxbFSINJ2oXXXd9L3ZfE3NLOS0YKABzeCJQADMAJwgAWyQyEBwIJA1tVz1PfgAFbEk5ALzCpAAmajKkAGYInTcPPn48BlhBBukm6xBWosRO0vLEEsjBmP40AAssaZb8+b6liv7q6Nrt3YSLZNkgA
 #align(center, commutative-diagram(
   node-padding: (50pt, 50pt),
-  node((0, 0), [$bH_k (bC^i)$]),
-  node((0, 1), [$bH_k (bC^(i+1))$]),
-  node((1, 0), [$bH_k (bM^i)$]),
-  node((1, 1), [$bH_k (bM^(i+1)).$]),
-  arr((0, 0), (0, 1), [$bH_k Psi^i$]),
-  arr((1, 0), (1, 1), [$bH_k tilde(Psi)^i$]),
-  arr((1, 0), (0, 0), [$bH_k phi^i$]),
-  arr((1, 1), (0, 1), [$bH_k phi^(i+1)$], label-pos: right),
+  node((0, 0), [$bH_k (bC^i_cx)$]),
+  node((0, 1), [$bH_k (bC^(i+1) _cx)$]),
+  node((1, 0), [$bH_k (bM^i _cx)$]),
+  node((1, 1), [$bH_k (bM^(i+1) _cx).$]),
+  arr((0, 0), (0, 1), [$bH_k Psi^i _cx$]),
+  arr((1, 0), (1, 1), [$bH_k tilde(Psi)^i _cx$]),
+  arr((1, 0), (0, 0), [$bH_k phi^i _cx$]),
+  arr((1, 1), (0, 1), [$bH_k phi^(i+1 ) _cx$], label-pos: right),
 ))
-By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i$ would have an isomorphic image as $bH_k Psi^i$. So we are done.
+By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i _cx$ would have an isomorphic image as $bH_k Psi^i _cx$. The rest easily follows from the definition of persistence homology.
 ]
+#TODO[don't know if we need the dot..]
 
 
 #bibliography("bib.yml")
