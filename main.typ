@@ -161,14 +161,14 @@ Now fix a morphism $Phi : cC -> cC'$ of cosheaves.
 
 #definition[
   Let $Phi : cC -> cC'$ be a morphism of cosheaves.
-  - $Phi$ is a *monomorphism* when each $Phi_tau : cC(tau) -> cC'(tau)$ is injective;
-  - $Phi$ is an *epimorphism* when each $Phi_tau : cC(tau) -> cC'(tau)$ is surjective; and
-  - $Phi$ is an *isomorphism* when each $Phi_tau : cC(tau) -> cC'(tau)$ is an isomorphism.
+  - $Phi$ is a *monomorphism* if each $Phi_tau : cC(tau) -> cC'(tau)$ is injective;
+  - $Phi$ is an *epimorphism* if each $Phi_tau : cC(tau) -> cC'(tau)$ is surjective; and
+  - $Phi$ is an *isomorphism* if each $Phi_tau : cC(tau) -> cC'(tau)$ is an isomorphism.
 
   We also say that $Phi$ is a *strict monomorphism* (resp. *strict epimorphism*) if $Phi$ is a monomorphism (resp. epimorphism) but is not an isomorphism.
 ]
 #proposition[
-When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consists of $(Phi_tau)^(-1) : cC'(tau) -> cC(tau)$ for each simplex $tau$ in $K$. 
+If $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consists of $(Phi_tau)^(-1) : cC'(tau) -> cC(tau)$ for each simplex $tau$ in $K$. 
 ]
 #proof[
   We need to check that $Phi^(-1)$ is indeed a natural transformation. For each pair $tau >= sigma$, the naturality of $Phi$ says that 
@@ -194,7 +194,7 @@ When $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ cons
 
 #example[
   Let $V = {v}$ and 
-  let $K$ be the simplicial complex ${tau}$, where $tau = {v}$. Let $cC : (K, >=) -> VF$ be the cosheaf which assigns the zero vector space to the only simplex $tau = {v}$ in $K$. Then $K$ has standard homology of a single point, which agrees with the homology induced by $FK$. On the other hand,  the chain complex induced by $cC$ has $cC_k (K; cC) = 0$ for all $k >= 0$, so $bH_k (K ; cC) = 0$ for all $k >= 0$. Thus $FK$ has the homology of a single point, but $cC$ does not.
+  let $K$ be the simplicial complex ${tau}$, where $tau = {v}$. Let $cC : (K, >=) -> VF$ be the cosheaf which assigns the zero vector space to the only simplex $tau = {v}$ in $K$. Then $K$ has standard homology of a single point, which agrees with the homology induced by $FK$. On the other hand,  the chain complex induced by $cC$ has $bC_k (K; cC) = 0$ for all $k >= 0$, so $bH_k (K ; cC) = 0$ for all $k >= 0$. Thus $FK$ has the homology of a single point, but $cC$ does not.
 ]
 
 #example[
@@ -335,9 +335,9 @@ The following is based on @notes[Section 8.1].
 = The Morse Chain Complex
 
 Fix a filtration ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ and  an acyclic matching $Sigma$ on $K$ compatible with ${cC^i}$. 
+Until further notice, also fix $i$ such that $1<= i<= l$.
 
 == Chain Construction 
-Until further notice, also fix $i$ such that $1<= i<= l$.
 
 #definition[
   Define $cC^i_(alpha, beta) : cC(alpha) -> cC(beta)$ as 
@@ -351,8 +351,7 @@ Until further notice, also fix $i$ such that $1<= i<= l$.
   ]
   #definition[
   For a $Sigma$-path
-     $
-    rho = (sigma_1 lt.tri tau_1 gt.tri sigma_2 lt.tri tau_2 gt.tri ... gt.tri sigma_m lt.tri tau_m ),
+     $rho = (sigma_1 lt.tri tau_1 gt.tri sigma_2 lt.tri tau_2 gt.tri ... gt.tri sigma_m lt.tri tau_m ),
   $
   define its *$cC^i$-weight* $w_(cC^i)(rho)$ as the linear map $cC^i (sigma_1) -> cC^i (tau_m)$ given by 
   $
@@ -380,7 +379,7 @@ Until further notice, also fix $i$ such that $1<= i<= l$.
 #notation[
   As the notations get visibly messy,
   from now on, with $K$, ${cC^i}$ and $Sigma$ fixed as above, for each $1 <= i <= l$ and each dimension $k >=0$, 
-  denote $ bC_k^i := bC_k (K ; cC^i) comma quad diff_k^i := diff_k^(cC^i) comma \ 
+  denote $ bC_k^i := bC_k (K ; cC^i) comma quad diff_k^i := diff_k^(cC^i) comma  quad 
   bM_k^i  := bC_k^Sigma (K; cC^i), quad  d_k^i := d_k^(cC^i, Sigma) . $ 
   We also denote $w_i (rho) := w_(cC^i) (rho)$ for any $Sigma$-path $rho$.
 ]
@@ -583,7 +582,10 @@ By the functoriality of homology, for each dimension $k >= 0$, the following com
 ))
 By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i _cx$ would have an isomorphic image as $bH_k Psi^i _cx$. The rest easily follows from the definition of persistence homology.
 ]
-#TODO[don't know if we need the dot..]
+// #TODO[don't know if we need the dot..]
 
+= Conclusion
+
+#TODO[don't know how to do]
 
 #bibliography("bib.yml")
