@@ -1,10 +1,10 @@
 #import "template.typ": *
 #show: thmrules
 #show: project.with(
-  title: "Computational Algebraic Topology",
-  subtitle: [A mini-project submitted for the degree of
+  title: "Discrete Morse Theory for Persistent Homology for Sequences of Cosheaves",
+  subtitle: [A mini-project submitted for the course of
   
-   _MSc Mathematical Sciences_],
+   _C3.9 Computational Algebraic Topology_],
   author: "Candidate Number 1079278", 
   date: "Hilary Term, 2024"
 )
