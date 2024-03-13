@@ -150,7 +150,8 @@
 
   ]
 
-
+    show ref: box.with(stroke: rgb(144, 238, 144), inset: (bottom: 0pt))
+    show link: box.with(stroke: rgb(144, 238, 144), inset: (bottom: 0pt))
 
   // Main body.
   set par(justify: true)

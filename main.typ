@@ -29,7 +29,10 @@ Throughout this project, let $K$ be a finite simplicial complex and let $FF$ be 
   + for every simplex $tau$ in $K$, the map $cC(tau >= tau)$ is the identity on $cC(tau)$, and 
   + for each triple $tau >= sigma >= rho $ in $K$, we have $cC(sigma >= rho) oo cC(tau >= sigma) = cC(tau >= rho)$.
 ]
+<def-cosheaf>
+#example[
 Write $FVR$ for the category of finite-dimensional vector spaces over $RR$. In particular, a cosheaf over $K$ which takes values in finite-dimensional real vector spaces is a functor $cD : (K , >=) -> FVR$. 
+]
 
 Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
 
@@ -56,6 +59,7 @@ Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
     )
   $
 ]
+<def-cosheaf-chain>
 
 #let ct(k, co: cC) = [$bC_#k (K; #co)$]
 #let cf(k, co: cC) = [$diff^#co _ #k$]
@@ -69,6 +73,7 @@ Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
   $
    is a chain complex over $FF$. 
 ]
+<cosheaf-is-chain>
 #proof[
   This is analogous to @notes[Proposition 7.8].
 ]
@@ -78,16 +83,18 @@ Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
   $bH_cx (K; cC) := Ker(cf(k)) over Im(cf(k+1)).
   $
 ]
+<cosheaf-homology-groups>
 
 #definition[
   Let $V$ be a $FF$-vector space.
-  The *constant* cosheaf $underline(V)_K$ is the functor given as follows:  
+  The *constant cosheaf* $underline(V)_K$ is the functor given as follows:  
   $
     underline(V)_K : (K , >=) &-> VF \
     tau &mapsto V \
     (tau >= sigma) &mapsto id_V.
   $
 ]
+<constant-cosheaf>
 
 = Morphism of Cosheaves
 Let $cC$ and $cC'$ be two cosheaves over $K$. 
@@ -114,6 +121,7 @@ Now fix a morphism $Phi : cC -> cC'$ of cosheaves.
 #proposition[
   $Phi : cC -> cC'$ induces a chain map $bC_cx (K; cC) -> bC_cx (K; cC')$.
 ]
+<morphism-induce-chain>
 #proof[
   For each $k>=0$ and any $k$-simplices  $tau$ and $tau'$  in $K$, define $Phi_k : bC_k (K; cC) -> bC_k (K; cC')$ as the linear map whose $cC(tau) -> cC'(tau')$ component is 
   $
@@ -155,6 +163,7 @@ Now fix a morphism $Phi : cC -> cC'$ of cosheaves.
 #corollary[
   $Phi : cC -> cC'$ induces a map on homology groups $bH_cx Phi : bH_cx (K; cC) -> bH_cx (K; cC')$.
 ]
+<morphism-induce-homology>
 #proof[
   By the functoriality of homology, i.e., @notes[Proposition 4.7].
 ]
@@ -167,9 +176,11 @@ Now fix a morphism $Phi : cC -> cC'$ of cosheaves.
 
   We also say that $Phi$ is a *strict monomorphism* (resp. *strict epimorphism*) if $Phi$ is a monomorphism (resp. epimorphism) but is not an isomorphism.
 ]
+<def-mono>
 #proposition[
 If $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consists of $(Phi_tau)^(-1) : cC'(tau) -> cC(tau)$ for each simplex $tau$ in $K$. 
 ]
+<iso-inverse>
 #proof[
   We need to check that $Phi^(-1)$ is indeed a natural transformation. For each pair $tau >= sigma$, the naturality of $Phi$ says that 
   $cC' (tau >= sigma) oo Phi_tau = Phi_sigma oo cC (tau >= sigma).
@@ -189,14 +200,15 @@ If $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consis
   In this case, 
   $bC_k (K; FK) = product_(dim tau = k) FF.
   $
-  This agrees with @notes[Definition 3.6]. It is also easy to see the boundary maps agree with @notes[Definition 3.7]. #TODO[show?]
+  This agrees with @notes[Definition 3.6]. It is also easy to see the boundary maps agree with @notes[Definition 3.7]. 
+  // #TODO[show?]
 ]
 
 #example[
   Let $V = {v}$ and 
   let $K$ be the simplicial complex ${tau}$, where $tau = {v}$. Let $cC : (K, >=) -> VF$ be the cosheaf which assigns the zero vector space to the only simplex $tau = {v}$ in $K$. Then $K$ has standard homology of a single point, which agrees with the homology induced by $FK$. On the other hand,  the chain complex induced by $cC$ has $bC_k (K; cC) = 0$ for all $k >= 0$, so $bH_k (K ; cC) = 0$ for all $k >= 0$. Thus $FK$ has the homology of a single point, but $cC$ does not.
 ]
-
+<task-3-1>
 #example[
   Let $V = {v_1, v_2}$ and let $K = {tau_1, tau_2}$, where $tau_1 = {v_1}$ and $tau_2 = {v_2}$. Let $cC$ be the cosheaf such that $cC(tau_1) = FF$ and $cC(tau_2) = 0$. (There is no non-trivial coface relation in $K$.) Then  with $FK$-coefficients, $K$ has chain complex $ bC_k (K ; FK) = cases(FF^2 quad &"if" k = 0 comma, 0 quad &"otherwise,") $ with all the boundary maps necessarily zero, which gives 
   $
@@ -206,7 +218,7 @@ If $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consis
   $ bH_k (K ; cC) = bC_k (K ; cC) = cases(FF quad &"if" k = 0 comma, 0 quad &"otherwise.") $
   Thus $FK$ does not have the homology of a single point, but $cC$ does. 
 ]
-
+<task-3-2>
 // #TODO[what is strict monomorphism? each component is injective or some component is injective?]
 
 #example[
@@ -243,11 +255,13 @@ If $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consis
   
   $K = Delta(1)$, so by @notes[Proposition 2.6], $K$ has the same homology groups with $FK$-coefficients as a single point. We then compute the chain complex of $K$ with $cC$-coefficients: $ bC_0 (K ; cC) = cC(tau_1) plus.circle cC(tau_2) = FF^3, $ $ bC_1 (K ; cC) = cC(tau_3) = FF^2, $ and the only non-trivial boundary map $diff_1^cC$ sends $(a, b)$ to $(a, -a, -b)$. Thus $Ker diff_1^cC = 0$ and $Im diff_1^cC = FF^2$, and thus $bH_0 (K; cC) = FF^3 over FF^2 = FF$ and $bH_1 (K ; cC) = 0$. Finally, since $Phi_0 : bC_0 (K; FK) ->  bC_0 (K; cC)$ is injective, which in particular does not send any generator of $bH_0 (K; FK)$ to zero, the induced map $bH_0 (K; FK) -> bH_0 (K; cC)$ is then necessarily an isomorphism $FF -> FF$. This is the only non-trivial map in $bH_cx (K; FK) -> bH_cx (K; cC)$, which is thus an isomorphism.
 ]
+<task-3-3>
 
 #proposition[
   For any simplicial complex $K$ and any cosheaf $cC$ over $K$,
   there does not exist a strict epimorphism $Phi : FK -> cC$ which induces an isomorphism on homology.
 ]
+<task-3-4>
 
 #proof[
   Suppose such $Phi$ exists, then there exists a simplex $tau$ in $K$ such that $Phi_tau : FF -> cC(tau)$ is surjective but is not an isomorphism. Then $Phi_tau$ is necessarily the zero map $FF -> cC(tau) = 0$. 
@@ -278,7 +292,6 @@ If $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consis
   // $
   //   cC^1 subset cC^2 subset ... subset cC^l = cC.
   // $
-
 Then for each dimension $k >= 0$, there are induced maps on homology 
 $
   bH_k (K ; cC^1) ->^(bH_k Psi^1) bH_k (K ; cC^2) ->^(bH_k Psi^2)  ... ->^(bH_k Psi^(l-1)) bH_k (K ; cC^l)
@@ -292,6 +305,7 @@ $
 $
 which is a subspace of $bH_k (K; cC^j)$. 
 ]
+<def-filtration>
 
 #lemma[
 If $cC = FK$, a filtration ${cC^i}$ of $K$ defined as above is the same as a filtration defined as in @notes[Definition 1.6].
@@ -322,15 +336,45 @@ The following is based on @notes[Section 8.1].
 #definition[
   Let ${cC^i}$ be a filtration of $cC$ over $K$ of length $l >= 1$. An acyclic partial matching $Sigma$ on $K$ is *compatible* with ${cC^i}$ if for any $1<= i <= l$ and any pair $sigma lt.tri tau$ in $Sigma$, the map $cC^i  (tau >= sigma)$ is an isomorphism.
 ]
+<def-compatible>
 // #definition[
 //   Given an acyclic partial matching $Sigma$ on $K$ which is compatible with ${cC^i}$,  for each $1 <= i <= l$, a simplex $tau$ in $K$ is said to be a *critical simplex* if $tau$ does not occur in any of the pairs in $Sigma$.
 //   // + $cC^i (tau) != 0$.
 // ]
 // #TODO[is this a helpful definition ? do we want to omit definition (2)?]
 
+  #figure(placement: auto, caption: [A filtration ${cC^i}$ of length $3$ over $Delta(1)$.],
+    table(
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: 10pt,
+    align: horizon,
+    [], $cC^1$, $Psi^1$, $cC^2$, $Psi^2$, $cC^3$,
+    $tau_1$, $0$, $0$, $FF$, $mat(1; 0 ; 0)$, $FF^3$,
+    $tau_3 >= tau_1$, $0$, [], $id_FF$, [], $mat(1, 2; 0, 4; 0, 3)$,
+    $tau_3$, $FF$, $id_FF$, $FF$, $mat(1; 0)$, $FF^2$,
+    $tau_3 >= tau_2$, $id_FF$, [], $id_FF$, [], $id_(FF^2)$,
+    $tau_2$, $FF$, $id_FF$, $FF$, $mat(1; 0)$, $FF^2$,
+    )
+  )
+  <fit-example>
 #example[
-  #TODO[maybe write some code]
+  Take $K = Delta(1)$ with $tau_1, tau_2, tau_3$ defined as in @task-3-3. We define the following cosheaves $cC^1, cC^2, cC^3$ on $K$ together with morphisms $Psi^1 : cC^1 -> cC^2$ and $Psi^2: cC^2 -> cC^3$, shown in @fit-example. Note that each $cC^i$ assigns a vector space to each $tau_j$ and a linear map to each of the coface relations $tau_3 >= tau_1$ and $tau_3 >= tau_2$. Each $Psi^i$ then assigns a linear map $cC^i (tau_j) -> cC^(i+1) (tau_j)$ to each $tau_j$. To verify the naturality of each $Psi^i$, note that the only non-trivial relation here is $  cC^3 (tau_3 >= tau_1) oo Psi^2 _(tau_3) = Psi^2 _(tau_1) oo cC^2 (tau_3 >= tau_1)$, i.e., 
+  $
+    mat(1, 2; 0, 4; 0, 3) mat(1; 0) = mat(1; 0; 0).
+  $
+  
+  Since each $Psi^i$ is a strict monomorphism, we have a filtration ${C^i}$ of length $3$ over $K$. 
+
+  We then construct a partial matching $Sigma$ on $K$, which only consists of the pair $(tau_2 lt.tri tau_3)$. Then the only critical simplex of $Sigma$ is $tau_1$. Since the only possible $Sigma$-path is $(tau_2 lt.tri tau_3)$, which is not a $Sigma$-cycle (and hence is a gradient path), we see that $Sigma$ is acyclic. Further, $Sigma$ is compatible with ${cC^i}$ defined in @fit-example, as for all $cC^i$, the linear map $cC^i (tau_3 >= tau_2)$ is the identity and thus an isomorphism.
+
+  // To construct some numerical examples, we further assume that any cosheaf is a functor $cC : (K , >=) -> FVR$ and for each vector space the standard basis is chosen. Then to define a cosheaf, we only need the following data:
+  // + A natural number $n_tau$ for each simplex $tau$ in $K$, representing the dimension of the $RR$-vector space $cC(tau)$, and
+  // + An $(n_(sigma) times n_tau)$-matrix over $RR$ for each pair $tau gt.tri sigma$, representing the linear map $cC(tau >= sigma)$.
+  // All other linear maps $cC(tau >= sigma)$, where $sigma$ has codimension greater than $1$ as a face of $tau$, can then be written as a composition $cC(tau'' gt.tri sigma) oo ... oo cC(tau gt.tri tau')$, where $tau gt.tri tau' gt.tri ... gt.tri tau'' gt.tri sigma$.
+
+  // We then assume for a filtration ${cC^i}$ of $cC$, each $Psi^i_tau : cC^i (tau) -> cC^(i+1) (tau)$ is represented by a matrix 
 ]
+<fit-example-1>
 
 = The Morse Chain Complex
 
@@ -376,6 +420,7 @@ Until further notice, also fix $i$ such that $1<= i<= l$.
     d_k ^(cC^i, Sigma)|_(alpha, beta) = cC^i_(alpha, beta) + sum_(Sigma"-path" rho = (sigma lt.tri ... lt.tri tau)) cC^i_(tau, beta) oo w_(cC^i)(rho) oo cC^i_(alpha, sigma).
   $
 ]
+<def-morse>
 #notation[
   As the notations get visibly messy,
   from now on, with $K$, ${cC^i}$ and $Sigma$ fixed as above, for each $1 <= i <= l$ and each dimension $k >=0$, 
@@ -386,6 +431,7 @@ Until further notice, also fix $i$ such that $1<= i<= l$.
 #proposition[
   For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is a chain complex.
 ]
+<morse-is-chain>
 #let ci(s, t) = [$cC^i_(#s, #t)$] 
 #proof[
   This is analogous to @notes[Proposition 8.8]. To elaborate, it suffices by induction to consider when $Sigma = {(sigma lt.tri tau)}$, the set of critical simplices $C_Sigma = K - {sigma, tau}$, and the only $Sigma$-path $rho = (sigma lt.tri tau)$. Then we need to show that for each $k >= 2$, for any $alpha, omega in C_Sigma$ such that $dim alpha = dim omega + 2 = k$, we have $ B := sum_(dim xi = k - 1 comma \ xi in C_Sigma) d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi) = 0. $
@@ -409,6 +455,7 @@ Until further notice, also fix $i$ such that $1<= i<= l$.
 #proposition[
   For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is chain homotopy equivalent to the chain complex $(bC_cx^i, diff^i_cx)$.
 ]
+<morse-equivalent>
 #proof[
   This is analogous to @notes[Proposition 8.10] and @notes[Lemma 8.11]. We first consider the case when $Sigma = {(sigma lt.tri tau)}$. For each $k >= 0$ and for each pair of $k$-simplices $(alpha, omega) in K times C_Sigma$, define the $cC^i  (alpha) -> cC^i (omega)$ component of the linear map $psi^i_k : bC_k^i -> bM_k ^i$  by 
   $
@@ -465,9 +512,8 @@ By induction on $Sigma$, a by-product of the proof above is the following:
 
 == The Commutative Cube
 
-To show that the Morse complex $bM_cx^i$ induces the same persistence homology as $bC_cx^i$, we first introduce a useful (and beautiful) diagram:
-
-#figure(caption: "The commutative cube.")[
+To show that the Morse complex $bM_cx^i$ induces the same persistent homology as $bC_cx^i$, we first introduce a useful (and beautiful) diagram, shown in @cube.
+#figure(caption: "The commutative cube.", placement: auto)[
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGsA9AFYgAvqXSZc+QijIBGKrUYs2XbgApeAajkBKIaPEgM2PASIAmcovrNWiDj00796wbsMTT0y6QXVbFQc1Zz1+NxdPY0kzGWQ5UgsbZXsOAFkNXld3KJMpcxQAZkTku1UM0OyPMS98uITC0qD0zJdwnJro7wLkYsaAlPLWsIi9UUUYKABzeCJQADMAJwgAWyQEkBwIJDIlMocoLHn54f1hTqXVneotpCs95oAFbD4DC+W1xA3bxGKH1OeWFObyMl0+fx+90CqUOx2Bo2qoI+SAALDdtogAKwDfabLAMWDqQG6V7nJFXRAANnRSAA7DjmngCTAidgSZUQQtkVSaYg0f82EzCbD5uztGFhNQGHR2DAGI8Yj4HIssFMABY4KJgum87EChxClkisVtBEgKUyuUK7oyEAq9Wa94U-k-XY4Oj4thqiAQXha7nUzYY74ehhen1+p2fPWQm6h8O+-0U+lBpAQ+MOb2JkQUERAA
 #align(center, commutative-diagram(
   node-padding: (50pt, 50pt),
@@ -542,6 +588,7 @@ Psi_alpha^i = \ Psi_beta^i oo
 #proposition[
   The bottom face (hence as well as the top face) of @cube commutes. 
 ]
+<bottom-commute>
 #proof[
   By induction, it suffices to consider $Sigma = {(sigma lt.tri tau)}$.
   It then suffices to show for any critical $k$-simplex $omega$ and any $k$-simplex $alpha$ that 
@@ -553,6 +600,7 @@ Psi_alpha^i = \ Psi_beta^i oo
 #theorem[
   For each $k >= 0$, $bC_k^cx$ and $bM_k^cx$ induce the same persistent homology.
 ]
+<same-persistence>
 #proof[
   We have shown that @cube commutes. In other words, in the category of chain complexes, we have the following commutative diagram: 
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGMAPAHpYQAX1LpMufIRQBGclVqMWbLnyEAKLAGo5ASjESQGbHgJEycpfWatEHALIbhRyWZlEF16rdUP2ZwFBbT1DUSUYKABzeCJQADMAJwgAWyQyEBwIJAVlOzYABWxhDTcQZLSkACZqbKQAZl8VeyysBlhNYqx9UoFyyvTEWqycxEy-VrQACywXEXFElKGm0dzmgocZueDQgzEKUSA
@@ -580,12 +628,20 @@ By the functoriality of homology, for each dimension $k >= 0$, the following com
   arr((1, 0), (0, 0), [$bH_k phi^i _cx$]),
   arr((1, 1), (0, 1), [$bH_k phi^(i+1 ) _cx$], label-pos: right),
 ))
-By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i _cx$ would have an isomorphic image as $bH_k Psi^i _cx$. The rest easily follows from the definition of persistence homology.
+By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i _cx$ would have an isomorphic image as $bH_k Psi^i _cx$. The rest easily follows from the definition of persistent homology.
 ]
 // #TODO[don't know if we need the dot..]
 
 = Conclusion
 
-#TODO[don't know how to do]
+In this project, working with a finite simplicial complex $K$ and a field $FF$, we have obtained the following main results:
++ We have defined a cosheaf $cC$ over $K$ taking values in $VF$ (@def-cosheaf), defined the chain complex $bC_cx (K; cC)$ (@def-cosheaf-chain and @cosheaf-is-chain) and its induced homology groups $bH_cx (K; cC)$ (@cosheaf-homology-groups), and defined the constant cosheaf $underline(V)_K$ for any $FF$-vector space $V$ (@constant-cosheaf);
++ We have defined a morphism $Phi : cC -> cC'$ of cosheaves over $K$ (@morphism-of-cosheaves), shown that it induces maps on the chain complexes $bC_cx (K; cC) -> bC_cx (K; cC')$ (@morphism-induce-chain) and on homology groups $bH_cx (K; cC) -> bH_cx (K; cC')$(@morphism-induce-homology), defined when such a $Phi$ is a (strict) monomorphism, a (strict) epimorphism and an isomorphism (@def-mono), and identified its inverse if $Phi$ is an isomorphism (@iso-inverse);
++ We have given some examples of $K$ and $cC$ (@task-3-1, @task-3-2, and @task-3-3) and shown that there does not exist a strict epimorphism $Phi : FK -> cC$ which induces an isomorphism on homology for any $K$ and $cC$ (@task-3-4); 
++ We have defined a filtration ${cC^i}$ of a cosheaf $cC$  of $K$ and defined the persistent homology of $K$ with coefficients in ${cC^i}$(@def-filtration);
++ We have defined an acyclic partial matching $Sigma$ on $K$ which is compatible with a filtration ${cC^i}$ (@def-compatible) and offered an example (@fit-example-1);
++ We have defined the Morse chain complex $bC_cx^Sigma (K ; cC^i)$ of $Sigma$ with coefficients in $cC^i$ when $Sigma$ is compatible with $cC^i$ (@def-morse), verified that $bC_cx^Sigma (K ; cC^i)$ is a chain complex (@morse-is-chain) and shown that $bC_cx^Sigma (K ; cC^i)$ is chain homotopy equivalent to $bC_cx (K ; cC^i)$ (@morse-equivalent). By constructing relevant maps and showing the commutativity of @cube (@front-commute and @bottom-commute), we have deduced that $bC_cx^Sigma (K ; cC^i)$ and $bC_cx (K ; cC^i)$ induce the same persistent homology (@same-persistence).
+
+As the Morse chain complex is constructed using only a subset of (critical) simplices in $K$, it has the potential to simplify the computation of the persistent homology with coefficients in a filtration ${cC^i}$, although we have imposed a rather strong condition for an acyclic partial matching $Sigma$ to be compatible with ${cC^i}$.
 
 #bibliography("bib.yml")
