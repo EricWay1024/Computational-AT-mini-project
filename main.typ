@@ -36,27 +36,35 @@ Write $FVR$ for the category of finite-dimensional vector spaces over $RR$. In p
 
 Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
 
-#definition[
-  For each dimension $k>=0$, the vector space of *$k$-chains of $K$* with $cC$-coefficients is the product 
-  $
-    bC_k (K; cC) = product_(dim tau = k) cC(tau).
-  $
-
-  For each $k >= 0$, the $k$-th *boundary map* of $K$ with $cC$-coefficients is the linear map 
-  $
-    diff^cC_k : bC_k (K ; cC) -> bC_(k+1) (K ; cC),
-  $
-  defined such that for each pair of simplices $tau >= sigma$ with $dim tau = k$ and $dim sigma = k - 1$, the $cC(tau) -> cC(sigma)$ component of $diff^cC_k$ is given by 
-  $
-    diff^cC_k|_(tau, sigma) = [sigma : tau] dot cC(tau >= sigma),
-  $
-  where 
-  $
+#notation[
+  Denote
+    $
     [sigma : tau] := cases(
-      +1 quad &sigma = tau_(-i) " for " i "even,",
-      -1 quad &sigma = tau_(-i) " for " i "odd,",
+      +1 quad &sigma = tau_(-j) " for " j "even,",
+      -1 quad &sigma = tau_(-j) " for " j "odd,",
       0 quad &"otherwise."
     )
+  $
+  Then define $cC_(tau, sigma) : cC(tau) -> cC(sigma)$ as 
+  $cC_(tau, sigma) := [sigma : tau] dot cC (tau >= sigma) 
+    // = cases(
+    //   + cC (tau >= sigma) quad & sigma = tau_(-j) "for even " j comma ,
+    //   - cC (tau >= sigma) quad & sigma = tau_(-j) "for odd " j comma , 
+    //   0 quad & "otherwise." 
+    // )
+  $.
+  ]
+<sign-adjustment>
+
+#definition[
+  For each dimension $k>=0$, the vector space of *$k$-chains of $K$* with $cC$-coefficients is the product 
+  $bC_k (K; cC) = product_(dim tau = k) cC(tau).
+  $
+  For each $k >= 0$, the $k$-th *boundary map* of $K$ with $cC$-coefficients is the linear map 
+  $diff^cC_k : bC_k (K ; cC) -> bC_(k+1) (K ; cC),
+  $
+  defined such that for each pair of simplices $tau >= sigma$ with $dim tau = k$ and $dim sigma = k - 1$, the $cC(tau) -> cC(sigma)$ component of $diff^cC_k$ is given by 
+  $diff^cC_k|_(tau, sigma) = cC_(tau, sigma).
   $
 ]
 <def-cosheaf-chain>
@@ -75,7 +83,15 @@ Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
 ]
 <cosheaf-is-chain>
 #proof[
-  This is analogous to @notes[Proposition 7.8].
+  This is analogous to @notes[Proposition 7.8]. It suffices to show that for any $(k+1)$-simplex $tau$ and any $(k-1)$-simplex $tau''$, the $cC(tau) -> cC(tau'')$ component of the composition $diff^cC _(k) oo diff^cC_(k+1)$ is zero. We compute 
+  $
+    (diff^cC _(k) oo diff^cC_(k+1))|_(tau, tau'') &= sum_(dim tau' = k) diff^cC_(k)|_(tau', tau'') oo diff^cC_(k+1) |_(tau, tau') \
+    &= sum_(dim tau' = k) [tau'' : tau'][tau' : tau] dot cC (tau' >= tau'') oo   cC (tau >= tau') \
+    // &= sum_(dim tau' = k) [tau'' : tau'][tau' : tau] dot cC (tau >= tau'') \ 
+    &= (sum_(dim tau' = k) [tau'' : tau'][tau' : tau]) dot cC (tau >= tau''), \ 
+    // &= 0,
+  $
+  where $cC (tau' >= tau'') oo   cC (tau >= tau') = cC (tau >= tau'')$ by the associativity axiom and $sum_(dim tau' = k) [tau'' : tau'][tau' : tau] = 0$ because it is the coefficient of $tau$ in $diff_k^K oo diff_(k+1)^K$.
 ]
 
 #definition[
@@ -87,12 +103,14 @@ Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
 
 #definition[
   Let $V$ be a $FF$-vector space.
-  The *constant cosheaf* $underline(V)_K$ is the functor given as follows:  
-  $
-    underline(V)_K : (K , >=) &-> VF \
-    tau &mapsto V \
-    (tau >= sigma) &mapsto id_V.
-  $
+  The *constant cosheaf* $underline(V)_K : (K , >=) &-> VF$ is the functor which sends any simplex $tau$ in $K$ to $V$ and any coface relation $tau >= sigma$ to the identity map $id_V$.
+  
+  //  is the functor given as follows:  
+  // $
+  //   underline(V)_K : (K , >=) &-> VF \
+  //   tau &mapsto V \
+  //   (tau >= sigma) &mapsto id_V.
+  // $
 ]
 <constant-cosheaf>
 
@@ -382,17 +400,8 @@ Fix a filtration ${cC^i}$ of $cC$ over $K$ of length $l >= 1$ and  an acyclic ma
 Until further notice, also fix $i$ such that $1<= i<= l$.
 
 == Chain Construction 
+Now it is helpful to recall @sign-adjustment.
 
-#definition[
-  Define $cC^i_(alpha, beta) : cC(alpha) -> cC(beta)$ as 
-  $
-    cC^i_(alpha, beta) = [beta : alpha] dot cC^i (alpha >= beta) = cases(
-      + cC^i (alpha >= beta) quad & beta = alpha_(-j) "for even " j comma ,
-      - cC^i (alpha >= beta) quad & beta = alpha_(-j) "for odd " j comma , 
-      0 quad & "otherwise." 
-    )
-  $
-  ]
   #definition[
   For a $Sigma$-path
      $rho = (sigma_1 lt.tri tau_1 gt.tri sigma_2 lt.tri tau_2 gt.tri ... gt.tri sigma_m lt.tri tau_m ),
@@ -405,7 +414,6 @@ Until further notice, also fix $i$ such that $1<= i<= l$.
 #remark[
   Since $cC^i_(tau_j, sigma_j) = plus.minus cC^i (tau_j >= sigma_j)$ for each $1 <= i <= l$ and $1 <=  j <= m$ is by definition an isomorphism, taking its inverse is justified.
 ]
-
 #definition[
   The *Morse complex* of $Sigma$ with coefficients in $cC^i$ is a sequence 
   $(bC_cx^Sigma (K; cC^i), d_cx ^(cC^i, Sigma) ),
@@ -434,6 +442,7 @@ Until further notice, also fix $i$ such that $1<= i<= l$.
 <morse-is-chain>
 #let ci(s, t) = [$cC^i_(#s, #t)$] 
 #proof[
+  #TODO[why induction works here?]
   This is analogous to @notes[Proposition 8.8]. To elaborate, it suffices by induction to consider when $Sigma = {(sigma lt.tri tau)}$, the set of critical simplices $C_Sigma = K - {sigma, tau}$, and the only $Sigma$-path $rho = (sigma lt.tri tau)$. Then we need to show that for each $k >= 2$, for any $alpha, omega in C_Sigma$ such that $dim alpha = dim omega + 2 = k$, we have $ B := sum_(dim xi = k - 1 comma \ xi in C_Sigma) d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi) = 0. $
   For each $xi$ in the sum, denote $B_xi := d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi)$, which by definition expands to 
   $
@@ -513,7 +522,9 @@ By induction on $Sigma$, a by-product of the proof above is the following:
 == The Commutative Cube
 
 To show that the Morse complex $bM_cx^i$ induces the same persistent homology as $bC_cx^i$, we first introduce a useful (and beautiful) diagram, shown in @cube.
-#figure(caption: "The commutative cube.", placement: auto)[
+#figure(caption: "The commutative cube.", 
+placement: auto
+)[
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGsA9AFYgAvqXSZc+QijIBGKrUYs2XbgApeAajkBKIaPEgM2PASIAmcovrNWiDj00796wbsMTT0y6QXVbFQc1Zz1+NxdPY0kzGWQ5UgsbZXsOAFkNXld3KJMpcxQAZkTku1UM0OyPMS98uITC0qD0zJdwnJro7wLkYsaAlPLWsIi9UUUYKABzeCJQADMAJwgAWyQEkBwIJDIlMocoLHn54f1hTqXVneotpCs95oAFbD4DC+W1xA3bxGKH1OeWFObyMl0+fx+90CqUOx2Bo2qoI+SAALDdtogAKwDfabLAMWDqQG6V7nJFXRAANnRSAA7DjmngCTAidgSZUQQtkVSaYg0f82EzCbD5uztGFhNQGHR2DAGI8Yj4HIssFMABY4KJgum87EChxClkisVtBEgKUyuUK7oyEAq9Wa94U-k-XY4Oj4thqiAQXha7nUzYY74ehhen1+p2fPWQm6h8O+-0U+lBpAQ+MOb2JkQUERAA
 #align(center, commutative-diagram(
   node-padding: (50pt, 50pt),
@@ -615,20 +626,43 @@ Psi_alpha^i = \ Psi_beta^i oo
   arr((1, 0), (0, 0), [$phi_cx^i$]),
   arr((1, 1), (0, 1), [$phi_cx^(i+1)$]),
 ))
-By the functoriality of homology, for each dimension $k >= 0$, the following commutes:
+By the functoriality of homology, for each dimension $k >= 0$, the following commutes for any pair of $1<= i < j <= l$:
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMAJAfQGsACABQBjAMIA9LAEoQAX1LpMufIRQBGclVqMWbLn0HsJgrAGo1UmfMXY8BImTVb6zVog48BhgLKSrCkAxbFSINJ2oXXXd9L3ZfE3NLOS0YKABzeCJQADMAJwgAWyQyEBwIJA1tVz1PfgAFbEk5ALzCpAAmajKkAGYInTcPPn48BlhBBukm6xBWosRO0vLEEsjBmP40AAssaZb8+b6liv7q6Nrt3YSLZNkgA
+// #align(center, commutative-diagram(
+//   node-padding: (50pt, 50pt),
+//   node((0, 0), [$bH_k (bC^i_cx)$]),
+//   node((0, 1), [$bH_k (bC^(i+1) _cx)$]),
+//   node((1, 0), [$bH_k (bM^i _cx)$]),
+//   node((1, 1), [$bH_k (bM^(i+1) _cx).$]),
+//   arr((0, 0), (0, 1), [$bH_k Psi^i _cx$]),
+//   arr((1, 0), (1, 1), [$bH_k tilde(Psi)^i _cx$]),
+//   arr((1, 0), (0, 0), [$bH_k phi^i _cx$]),
+//   arr((1, 1), (0, 1), [$bH_k phi^(i+1 ) _cx$], label-pos: right),
+// ))
+
+// https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMAJAfQGsACABTsAwgD0sAShABfUuky58hFAEZyVWoxZsufYeMFYA1KsnS5C7HgJEyqzfWatEHHgOEBZCRfkgM1spE6g7UTjqueh7s3kam5rJ+AUq2KABMGmHaLm58QqJiggBWALRmvlYpKsgAzJlazrru+YZFCZb+ijbVGaENEbnRsaXliZXdRHV94TlR+cPtmjBQAObwRKAAZgBOEAC2SGQgOBBI6v2zzQAK2BJjIDv7SBnHp4h1F015eAywgjdSO4dR4HRAvE6HLKNSLNNAACywQL8IKQHwhiHOMy+AnhiLiZnuKMQABZqOiAKxQgZzAGFEYVB67UEANjJb1JnxheVxdLKDKJAHY2UhKZzBvwecV+UykKzXkghWK5j8-gDJLyCcCZRjhSSqTkAHRGwnatFvOVY1xGg2yCgyIA
 #align(center, commutative-diagram(
   node-padding: (50pt, 50pt),
-  node((0, 0), [$bH_k (bC^i_cx)$]),
-  node((0, 1), [$bH_k (bC^(i+1) _cx)$]),
-  node((1, 0), [$bH_k (bM^i _cx)$]),
-  node((1, 1), [$bH_k (bM^(i+1) _cx).$]),
-  arr((0, 0), (0, 1), [$bH_k Psi^i _cx$]),
-  arr((1, 0), (1, 1), [$bH_k tilde(Psi)^i _cx$]),
-  arr((1, 0), (0, 0), [$bH_k phi^i _cx$]),
-  arr((1, 1), (0, 1), [$bH_k phi^(i+1 ) _cx$], label-pos: right),
+  node((0, 0), [$bH_k (bC^i)$]),
+  node((0, 1), [$bH_k (bC^(i+1))$]),
+  node((1, 0), [$bH_k (bM^i)$]),
+  node((1, 1), [$bH_k (bM^(i+1))$]),
+  node((0, 2), [$bH_k (bC^(j-1))$]),
+  node((0, 3), [$bH_k (bC^(j))$]),
+  node((1, 2), [$bH_k (bM^(j-1))$]),
+  node((1, 3), [$bH_k (bM^(j))$]),
+  arr((0, 0), (0, 1), [$bH_k Psi^i$]),
+  arr((1, 0), (1, 1), [$bH_k tilde(Psi)^i$]),
+  arr((1, 0), (0, 0), [$bH_k phi^i$]),
+  arr((1, 1), (0, 1), [$bH_k phi^(i+1)$]),
+  arr((0, 2), (0, 3), [$bH_k Psi^(j-1)$]),
+  arr((1, 2), (0, 2), [$bH_k phi^(j-1)$]),
+  arr((1, 3), (0, 3), [$bH_k phi^(j)$]),
+  arr((1, 2), (1, 3), [$bH_k tilde(Psi)^(j-1)$]),
+  arr((0, 1), (0, 2), [$...$]),
+  arr((1, 1), (1, 2), [$...$]),
 ))
-By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^i _cx$ would have an isomorphic image as $bH_k Psi^i _cx$. The rest easily follows from the definition of persistent homology.
+By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^(i->j)$ would have an isomorphic image as $bH_k Psi^(i->j)$. The result thus follows from the definition of persistent homology.
 ]
 // #TODO[don't know if we need the dot..]
 
@@ -640,7 +674,7 @@ In this project, working with a finite simplicial complex $K$ and a field $FF$, 
 + We have given some examples of $K$ and $cC$ (@task-3-1, @task-3-2, and @task-3-3) and shown that there does not exist a strict epimorphism $Phi : FK -> cC$ which induces an isomorphism on homology for any $K$ and $cC$ (@task-3-4); 
 + We have defined a filtration ${cC^i}$ of a cosheaf $cC$  of $K$ and defined the persistent homology of $K$ with coefficients in ${cC^i}$(@def-filtration);
 + We have defined an acyclic partial matching $Sigma$ on $K$ which is compatible with a filtration ${cC^i}$ (@def-compatible) and offered an example (@fit-example-1);
-+ We have defined the Morse chain complex $bC_cx^Sigma (K ; cC^i)$ of $Sigma$ with coefficients in $cC^i$ when $Sigma$ is compatible with $cC^i$ (@def-morse), verified that $bC_cx^Sigma (K ; cC^i)$ is a chain complex (@morse-is-chain) and shown that $bC_cx^Sigma (K ; cC^i)$ is chain homotopy equivalent to $bC_cx (K ; cC^i)$ (@morse-equivalent). By constructing relevant maps and showing the commutativity of @cube (@front-commute and @bottom-commute), we have deduced that $bC_cx^Sigma (K ; cC^i)$ and $bC_cx (K ; cC^i)$ induce the same persistent homology (@same-persistence).
++ We have defined the Morse chain complex $bC_cx^Sigma (K ; cC^i)$ of $Sigma$ with coefficients in ${cC^i}$ when $Sigma$ is compatible with ${cC^i}$ (@def-morse), verified that $bC_cx^Sigma (K ; cC^i)$ is a chain complex (@morse-is-chain) and shown that $bC_cx^Sigma (K ; cC^i)$ is chain homotopy equivalent to $bC_cx (K ; cC^i)$ (@morse-equivalent). By constructing relevant maps and showing the commutativity of @cube (@front-commute and @bottom-commute), we have deduced that $bC_cx^Sigma (K ; cC^i)$ and $bC_cx (K ; cC^i)$ induce the same persistent homology (@same-persistence).
 
 As the Morse chain complex is constructed using only a subset of (critical) simplices in $K$, it has the potential to simplify the computation of the persistent homology with coefficients in a filtration ${cC^i}$. One shortcoming of the current method is that the condition which we have imposed for an acyclic partial matching $Sigma$ to be compatible with ${cC^i}$ is a rather strong one and thus may be difficult to satisfy in a practical setting.
 

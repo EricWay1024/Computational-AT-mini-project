@@ -12,5 +12,8 @@
         "typst": {
             "parser": "latex"
         }
+    },
+    "files.watcherExclude": {
+        "**/target": true
     }
 }
