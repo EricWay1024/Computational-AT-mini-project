@@ -414,6 +414,26 @@ Now it is helpful to recall @sign-adjustment.
 #remark[
   Since $cC^i_(tau_j, sigma_j) = plus.minus cC^i (tau_j >= sigma_j)$ for each $1 <= i <= l$ and $1 <=  j <= m$ is by definition an isomorphism, taking its inverse is justified.
 ]
+#let cw = [$cal(w)$]
+
+#notation[
+  Let $alpha, beta$ be simplices in $K$ such that $dim alpha = dim beta + 1$ and let $rho = (sigma lt.tri ... lt.tri tau)$ be a $Sigma$-path. Denote $cw(alpha gt.tri rho gt.tri beta) := cC^i_(tau, beta) oo w_(cC^i) (rho) oo cC^i_(alpha, sigma)$. Note that $cw(alpha gt.tri rho gt.tri beta) != 0$ if and only if $alpha gt.tri sigma$ and $tau gt.tri beta$. In particular, if we also allow $rho$ to be the empty path $emptyset$, then in this case $cw(alpha gt.tri emptyset gt.tri beta) := cC^(i)_(alpha, beta)$.
+]
+
+#definition[
+  Let $L$ be a subset (but not necessarily a subcomplex) of $K$  and let $(bD_cx, diff^bD_cx)$ be a sequence (but not necessarily a chain complex), where each $bD_k = product_(dim alpha = k,  alpha in L) cC^i (alpha) $. Let $(sigma lt.tri tau)$ be a pair of simplices in $K$ but not in $L$. Define the *elimination operation* of $(sigma lt.tri tau)$ on $(bD_cx, diff^bD_cx)$ as follows: for any $alpha, beta$ such that $k = dim alpha = dim tau = dim beta + 1 = dim sigma + 1$, this operation changes $diff_k^bD |_(alpha, beta)$ to 
+  $
+    diff_k^bD |_(alpha, beta)- diff_k^bD |_(tau, beta) oo (cC^i_(tau, sigma))^(-1) oo diff_k^bD |_(alpha, sigma),
+  $
+  and leaves all $diff_i^bD$ for $i != k$ unchanged.
+]
+#TODO[formalise this idea]
+#lemma[
+  The elimination operation leaves other pairs of an acyclic partial matching unchanged.
+]
+#lemma[
+  We have the Morse complex (constructed by induction) with the following boundary operation...
+]
 #definition[
   The *Morse complex* of $Sigma$ with coefficients in $cC^i$ is a sequence 
   $(bC_cx^Sigma (K; cC^i), d_cx ^(cC^i, Sigma) ),
@@ -429,6 +449,18 @@ Now it is helpful to recall @sign-adjustment.
   $
 ]
 <def-morse>
+
+#lemma[
+  Let $P$ be a proposition on the Morse complex $(bC_cx^Sigma (K; cC^i), d_cx^(cC^i, Sigma))$. Then to prove $P$ for any acyclic partial matching $Sigma$ compatible with ${cC^i}$, it suffices to consider the case $Sigma = {(sigma lt.tri tau)}$.
+]
+#proof[
+  Let $Gamma_Sigma$ be a function such that sends 
+  For an arbitrary $Sigma$,  take any $(sigma lt.tri tau)$ in $Sigma$ and let $Sigma' = Sigma - {(sigma lt.tri tau)}$. We would like to show the following two sequences are equivalent:
+  - $(bC_cx^Sigma (K; cC^i), d_cx^(cC^i, Sigma))$;
+  - #TODO[how to do...]
+]
+
+
 #notation[
   As the notations get visibly messy,
   from now on, with $K$, ${cC^i}$ and $Sigma$ fixed as above, for each $1 <= i <= l$ and each dimension $k >=0$, 
@@ -436,6 +468,10 @@ Now it is helpful to recall @sign-adjustment.
   bM_k^i  := bC_k^Sigma (K; cC^i), quad  d_k^i := d_k^(cC^i, Sigma) . $ 
   We also denote $w_i (rho) := w_(cC^i) (rho)$ for any $Sigma$-path $rho$.
 ]
+To simplify later proofs, we first need an 'induction principle' for the Morse complex.
+
+
+
 #proposition[
   For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is a chain complex.
 ]
