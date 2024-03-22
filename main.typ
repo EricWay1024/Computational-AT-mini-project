@@ -15,7 +15,6 @@
 = Introduction
 
 The goal of this project is to describe how discrete Morse theory can be used to simplify the computation of persistent homology for sequences of cosheaves over finite simplicial complexes.
-
 Throughout this project, let $K$ be a finite simplicial complex and let $FF$ be a field.
 
 = Cosheaf Homology
@@ -242,11 +241,11 @@ If $Phi: cC -> cC'$ is an isomorphism, its inverse $Phi^(-1) : cC' -> cC$ consis
 #example[
   Let $V = {v_1, v_2}$ and $K = {tau_1, tau_2, tau_3}$, where $tau_1 = {v_1}$, $tau_2 = {v_2}$ and $tau_3 = {v_1, v_2}$. (In other words, $K = Delta(1)$.) Define cosheaf $cC$  as follows: 
   $
-    tau_1 &mapsto FF, \
-    tau_2 &mapsto FF^2, \
-    tau_3 &mapsto FF^2, \
-    (tau_3 >= tau_1) &mapsto ((a, b) |-> a), \
-    (tau_3 >= tau_2) &mapsto id_(FF^2). \
+    tau_1 &mapsto FF, 
+    tau_2 &mapsto FF^2, 
+    tau_3 &mapsto FF^2, 
+    (tau_3 >= tau_1) &mapsto ((a, b) |-> a), 
+    (tau_3 >= tau_2) &mapsto id_(FF^2). 
   $
   There is no non-trivial coface relation composition in $K$, so $cC$ is easily seen to be a cosheaf.
 
@@ -406,34 +405,35 @@ Now it is helpful to recall @sign-adjustment.
   For a $Sigma$-path
      $rho = (sigma_1 lt.tri tau_1 gt.tri sigma_2 lt.tri tau_2 gt.tri ... gt.tri sigma_m lt.tri tau_m ),
   $
-  define its *$cC^i$-weight* $w_(cC^i)(rho)$ as the linear map $cC^i (sigma_1) -> cC^i (tau_m)$ given by 
+  define its *$cC^i$-weight* $w_(i)(rho)$ as the linear map $cC^i (sigma_1) -> cC^i (tau_m)$ given by 
   $
-    w_(cC^i)(rho) := (-1)^m dot (cC_(tau_m, sigma_m)^i)^(-1) oo ... oo (cC_(tau_2, sigma_2)^i)^(-1) oo cC_(tau_1, sigma_2)^i oo (cC_(tau_1, sigma_1)^i)^(-1).
+    w_(i)(rho) := (-1)^m dot (cC_(tau_m, sigma_m)^i)^(-1) oo ... oo (cC_(tau_2, sigma_2)^i)^(-1) oo cC_(tau_1, sigma_2)^i oo (cC_(tau_1, sigma_1)^i)^(-1).
   $
 ]
 #remark[
   Since $cC^i_(tau_j, sigma_j) = plus.minus cC^i (tau_j >= sigma_j)$ for each $1 <= i <= l$ and $1 <=  j <= m$ is by definition an isomorphism, taking its inverse is justified.
 ]
-#let cw = [$cal(w)$]
+#let cw = [$cal(w)_i$]
 
 #notation[
-  Let $alpha, beta$ be simplices in $K$ such that $dim alpha = dim beta + 1$ and let $rho = (sigma lt.tri ... lt.tri tau)$ be a $Sigma$-path. Denote $cw(alpha gt.tri rho gt.tri beta) := cC^i_(tau, beta) oo w_(cC^i) (rho) oo cC^i_(alpha, sigma)$. Note that $cw(alpha gt.tri rho gt.tri beta) != 0$ if and only if $alpha gt.tri sigma$ and $tau gt.tri beta$. In particular, if we also allow $rho$ to be the empty path $emptyset$, then in this case $cw(alpha gt.tri emptyset gt.tri beta) := cC^(i)_(alpha, beta)$.
+  Let $alpha, beta$ be simplices in $K$ such that $dim alpha = dim beta + 1$ and let $rho = (sigma lt.tri ... lt.tri tau)$ be a $Sigma$-path. Denote $cw(alpha gt.tri rho gt.tri beta) := cC^i_(tau, beta) oo w_(i) (rho) oo cC^i_(alpha, sigma)$. Note that $cw(alpha gt.tri rho gt.tri beta) != 0$ if and only if $alpha gt.tri sigma$ and $tau gt.tri beta$. In particular, if we also allow $rho$ to be the empty path $emptyset$, then in this case $cw(alpha gt.tri emptyset gt.tri beta) := cC^(i)_(alpha, beta)$.
 ]
+<new-path-notation>
 
-#definition[
-  Let $L$ be a subset (but not necessarily a subcomplex) of $K$  and let $(bD_cx, diff^bD_cx)$ be a sequence (but not necessarily a chain complex), where each $bD_k = product_(dim alpha = k,  alpha in L) cC^i (alpha) $. Let $(sigma lt.tri tau)$ be a pair of simplices in $K$ but not in $L$. Define the *elimination operation* of $(sigma lt.tri tau)$ on $(bD_cx, diff^bD_cx)$ as follows: for any $alpha, beta$ such that $k = dim alpha = dim tau = dim beta + 1 = dim sigma + 1$, this operation changes $diff_k^bD |_(alpha, beta)$ to 
-  $
-    diff_k^bD |_(alpha, beta)- diff_k^bD |_(tau, beta) oo (cC^i_(tau, sigma))^(-1) oo diff_k^bD |_(alpha, sigma),
-  $
-  and leaves all $diff_i^bD$ for $i != k$ unchanged.
-]
-#TODO[formalise this idea]
-#lemma[
-  The elimination operation leaves other pairs of an acyclic partial matching unchanged.
-]
-#lemma[
-  We have the Morse complex (constructed by induction) with the following boundary operation...
-]
+// #definition[
+//   Let $L$ be a subset (but not necessarily a subcomplex) of $K$  and let $(bD_cx, diff^bD_cx)$ be a sequence (but not necessarily a chain complex), where each $bD_k = product_(dim alpha = k,  alpha in L) cC^i (alpha) $. Let $(sigma lt.tri tau)$ be a pair of simplices in $K$ but not in $L$. Define the *elimination operation* of $(sigma lt.tri tau)$ on $(bD_cx, diff^bD_cx)$ as follows: for any $alpha, beta$ such that $k = dim alpha = dim tau = dim beta + 1 = dim sigma + 1$, this operation changes $diff_k^bD |_(alpha, beta)$ to 
+//   $
+//     diff_k^bD |_(alpha, beta)- diff_k^bD |_(tau, beta) oo (cC^i_(tau, sigma))^(-1) oo diff_k^bD |_(alpha, sigma),
+//   $
+//   and leaves all $diff_i^bD$ for $i != k$ unchanged.
+// ]
+// #TODO[formalise this idea]
+// #lemma[
+//   The elimination operation leaves other pairs of an acyclic partial matching unchanged.
+// ]
+// #lemma[
+//   We have the Morse complex (constructed by induction) with the following boundary operation...
+// ]
 #definition[
   The *Morse complex* of $Sigma$ with coefficients in $cC^i$ is a sequence 
   $(bC_cx^Sigma (K; cC^i), d_cx ^(cC^i, Sigma) ),
@@ -447,30 +447,48 @@ Now it is helpful to recall @sign-adjustment.
   $
     d_k ^(cC^i, Sigma)|_(alpha, beta) = cC^i_(alpha, beta) + sum_(Sigma"-path" rho = (sigma lt.tri ... lt.tri tau)) cC^i_(tau, beta) oo w_(cC^i)(rho) oo cC^i_(alpha, sigma).
   $
+  Alternatively, if we denote the set of all $Sigma$-path (including the empty path $emptyset$) as $Gamma_Sigma$, we could write $ d_k ^(cC^i, Sigma)|_(alpha, beta) = sum_(rho in Gamma_Sigma) cw(alpha gt.tri rho gt.tri beta)$ using @new-path-notation. 
 ]
 <def-morse>
 
+To simplify later proofs, we first need an 'induction principle' for the Morse complex. This lemma is the only place where we vary $Sigma$ in this section.
 #lemma[
-  Let $P$ be a proposition on the Morse complex $(bC_cx^Sigma (K; cC^i), d_cx^(cC^i, Sigma))$. Then to prove $P$ for any acyclic partial matching $Sigma$ compatible with ${cC^i}$, it suffices to consider the case $Sigma = {(sigma lt.tri tau)}$.
+  Let $P$ be a proposition on the Morse complex $(bC_cx^Sigma (K; cC^i), d_cx^(cC^i, Sigma))$. Then to prove $P$ for any acyclic partial matching $Sigma$ compatible with ${cC^i}$, it suffices to consider the case $Sigma_0 = {(sigma lt.tri tau)}$.
 ]
+<induction-principle>
 #proof[
-  Let $Gamma_Sigma$ be a function such that sends 
-  For an arbitrary $Sigma$,  take any $(sigma lt.tri tau)$ in $Sigma$ and let $Sigma' = Sigma - {(sigma lt.tri tau)}$. We would like to show the following two sequences are equivalent:
-  - $(bC_cx^Sigma (K; cC^i), d_cx^(cC^i, Sigma))$;
-  - #TODO[how to do...]
+  We suppress the explicit appearance of $K$ and $cC^i$ in the notations as they are fixed in this proof.
+  First, we notice that if $Sigma_0 = {(sigma lt.tri tau)}$ with $dim sigma + 1 = dim tau = k$, then the only $Sigma_0$-path is $(sigma lt.tri tau)$, and the construction of the Morse complex $(bC_cx^(Sigma_0) , d_cx ^(Sigma_0) )$ based on the _sequence_ $(bC_cx , d_cx  )$ (we forget that $(bC_cx , d_cx  )$ is a chain complex for this algorithm) is equivalent to the following algorithm $(star)$:
+  + For each $k$-simplex $alpha$ and $(k-1)$-simplex $beta$, change the block $d_k |_(alpha, beta)$ to $ d_k |_(alpha, beta) - d_k |_(tau, beta) oo (d_k|_(tau, sigma))^(-1) oo d_k |_(alpha, sigma); $ 
+  + Remove $cC^i (tau)$ from the product of $bC_k$ and remove $cC^i (sigma)$ from the product of $bC_(k-1)$, and remove all corresponding blocks from $d_(k+1)$, $d_k$ and $d_(k-1)$.
+  // + $diff_k^bD |_(alpha, beta)- diff_k^bD |_(tau, beta) oo (cC^i_(tau, sigma))^(-1) oo diff_k^bD |_(alpha, sigma),$
+  For an arbitrary $Sigma$, we claim that applying algorithm $(star)$ recursively with each pair in $Sigma$ produces the same Morse complex $(bC_cx^(Sigma) , d_cx ^(Sigma) )$ as in @def-morse. Take any $(sigma lt.tri tau)$ in $Sigma$ and let $Sigma' = Sigma - {(sigma lt.tri tau)}$. Then by induction, suppose we have the Morse complex $(bC_cx^(Sigma') , d_cx ^(Sigma') )$ specified as in @def-morse. Then we note that for any $rho in Gamma_Sigma'$, $cw (tau gt.tri rho gt.tri sigma) != 0$ only if $rho  = emptyset$, for otherwise we can form a $Sigma$-cycle $(sigma lt.tri tau  lt.tri rho)$, which contradicts the acyclicity of $Sigma$. Thus, 
+  $d_k^(Sigma')|_(tau, sigma) = sum_(rho in Gamma_(Sigma')) cw (tau gt.tri rho gt.tri sigma) = cC^i_(tau, sigma)$. 
+  
+  Therefore, step (1) of algorithm $(star)$ changes the block $d_k^(Sigma')|_(alpha, beta)$ to 
+  $
+    & d_k ^(Sigma') |_(alpha, beta) - d_k ^(Sigma') |_(tau, beta) oo (cC^i_(tau, sigma))^(-1) oo d_k ^(Sigma') |_(alpha, sigma) \
+    
+     = &sum_(rho_1 in Gamma_Sigma') cw(alpha gt.tri rho_1 gt.tri beta) - (sum_(rho_2 in Gamma_Sigma') cw(tau gt.tri rho_2 gt.tri beta)) oo (cC^i_(tau, sigma))^(-1) oo (sum_(rho_3 in Gamma_Sigma') cw(alpha gt.tri rho_3 gt.tri sigma)) \
+
+    = &sum_(rho_1 in Gamma_Sigma') cw(alpha gt.tri rho_1 gt.tri beta) - (sum_(rho_2 in Gamma_Sigma') sum_(rho_3 in Gamma_Sigma') cw(tau gt.tri rho_2 gt.tri beta) oo (cC^i_(tau, sigma))^(-1) oo  cw(alpha gt.tri rho_3 gt.tri sigma)) \
+    = &  sum_(rho in Gamma_Sigma) cw (alpha gt.tri rho gt.tri beta) = d_k^Sigma|_(alpha,beta).
+  $
+  The last but one equality is because any $rho in Gamma_Sigma$ 
+  - either does not consist of $(sigma lt.tri tau)$, in which case $rho = rho_1 in Gamma_Sigma'$, 
+  - or passes $(sigma lt.tri tau)$ once, in which case $rho$ can be written as $(rho_3 gt.tri sigma lt.tri tau gt.tri rho_2)$ for $rho_2, rho_3 in Gamma_Sigma'$.
+
+  Step (2) of algorithm $(star)$ simply updates the critical simplices by removing $sigma$ and $tau$. Thus, we see that applying algorithm $(star)$ to $(bC_cx^(Sigma') , d_cx ^(Sigma') )$ produces the same $(bC_cx^(Sigma) , d_cx ^(Sigma) )$ as in @def-morse. In other words, we could have equivalently defined the Morse complex as the sequence produced by recursively applying algorithm $(star)$ with each pair of $Sigma$ (in an arbitrary order) to $(bC_cx, d_cx)$. This constructive definition indicates this lemma.
 ]
 
+// #TODO[change all $cC^i$ to $cC$ since they are fixed...]
 
 #notation[
-  As the notations get visibly messy,
-  from now on, with $K$, ${cC^i}$ and $Sigma$ fixed as above, for each $1 <= i <= l$ and each dimension $k >=0$, 
-  denote $ bC_k^i := bC_k (K ; cC^i) comma quad diff_k^i := diff_k^(cC^i) comma  quad 
-  bM_k^i  := bC_k^Sigma (K; cC^i), quad  d_k^i := d_k^(cC^i, Sigma) . $ 
-  We also denote $w_i (rho) := w_(cC^i) (rho)$ for any $Sigma$-path $rho$.
+ With $K$, ${cC^i}$ and $Sigma$ fixed as above, for each $1 <= i <= l$ and each dimension $k >=0$, 
+  denote $bC_k^i := bC_k (K ; cC^i) comma  diff_k^i := diff_k^(cC^i) comma   
+  bM_k^i  := bC_k^Sigma (K; cC^i),   d_k^i := d_k^(cC^i, Sigma) . $ 
+  // We also denote $w_i (rho) := w_(cC^i) (rho)$ for any $Sigma$-path $rho$.
 ]
-To simplify later proofs, we first need an 'induction principle' for the Morse complex.
-
-
 
 #proposition[
   For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is a chain complex.
@@ -478,8 +496,8 @@ To simplify later proofs, we first need an 'induction principle' for the Morse c
 <morse-is-chain>
 #let ci(s, t) = [$cC^i_(#s, #t)$] 
 #proof[
-  #TODO[why induction works here?]
-  This is analogous to @notes[Proposition 8.8]. To elaborate, it suffices by induction to consider when $Sigma = {(sigma lt.tri tau)}$, the set of critical simplices $C_Sigma = K - {sigma, tau}$, and the only $Sigma$-path $rho = (sigma lt.tri tau)$. Then we need to show that for each $k >= 2$, for any $alpha, omega in C_Sigma$ such that $dim alpha = dim omega + 2 = k$, we have $ B := sum_(dim xi = k - 1 comma \ xi in C_Sigma) d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi) = 0. $
+  // #TODO[why induction works here?]
+  This is analogous to @notes[Proposition 8.8]. To elaborate, by @induction-principle, it suffices to consider when $Sigma = {(sigma lt.tri tau)}$, the set of critical simplices $C_Sigma = K - {sigma, tau}$, and the only $Sigma$-path $rho = (sigma lt.tri tau)$. Then we need to show that for each $k >= 2$, for any $alpha, omega in C_Sigma$ such that $dim alpha = dim omega + 2 = k$, we have $ B := sum_(dim xi = k - 1 comma \ xi in C_Sigma) d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi) = 0. $
   For each $xi$ in the sum, denote $B_xi := d^i_(k-1) |_( xi, omega) oo  d^i_k |_(alpha , xi)$, which by definition expands to 
   $
     B_xi = 
@@ -491,18 +509,18 @@ To simplify later proofs, we first need an 'induction principle' for the Morse c
   $
   where the fourth term is always zero, since $ci(alpha, sigma) != 0$ only if $dim sigma = k-1$, but $ci(xi, sigma) != 0$ only if $dim sigma = k-2$. Now denote the first three terms of $B_xi$ as $B_(xi, j)$ for $j = 1, 2, 3$ respectively, so $B_xi = sum_(j=1)^3 B_(xi, j)$. Since $diff^i_cx$ is a boundary operator, we have $ sum_xi B_(xi, 1) = - ci(tau, omega) oo ci(alpha, tau) -  ci(sigma, omega) oo ci(alpha, sigma). $
   We then see that $sum_xi B_(xi, j) = 0$ for any $j = 1, 2, 3$ if $dim sigma != k - 2$ and $dim sigma != k-1$. Then there remain two cases:
-  - If $dim sigma = k-2$ and so $dim tau = k -1$, then $B_(xi, 3) = 0$ for any $xi$ in the sum, and $ sum_xi B_(xi, 2) =  ci(tau, omega) oo (ci(tau, sigma))^(-1) oo ci(tau, sigma) oo ci(alpha, tau) =  ci(tau, omega) oo ci(alpha, tau), $
+  - If $dim sigma = k-2$ and so $dim tau = k -1$, then $B_(xi, 3) = 0$ for any $xi$ in the sum, and $sum_xi B_(xi, 2) =  ci(tau, omega) oo (ci(tau, sigma))^(-1) oo ci(tau, sigma) oo ci(alpha, tau) =  ci(tau, omega) oo ci(alpha, tau), $
     which would cancel with $sum_xi B_(xi, 1)$;
   - If $dim sigma = k -1$, the situation is similar as above, with $B_(xi, 2) = 0$ for any $xi$ and also $sum_xi B_(xi, 3) $ cancelling with $sum_xi B_(xi, 1) $.
   Therefore, we conclude that $B = sum_xi B_xi = 0$ as desired.
 ]
 == Chain Homotopy Equivalence
 #proposition[
-  For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is chain homotopy equivalent to the chain complex $(bC_cx^i, diff^i_cx)$.
+  For each $i$, the Morse complex $(bM_cx^i, d^i_cx)$ is chain homotopy equivalent to the chain complex $(bC_cx^i, diff^i_cx)$.  In particular, there exists a chain map $phi^i_cx : bM_cx^i -> bC_cx^i$ which induces an isomorphism   $bH_k (bM^i_cx) -> bH_k (bC^i_cx)$ for each dimension $k>=0$.
 ]
 <morse-equivalent>
 #proof[
-  This is analogous to @notes[Proposition 8.10] and @notes[Lemma 8.11]. We first consider the case when $Sigma = {(sigma lt.tri tau)}$. For each $k >= 0$ and for each pair of $k$-simplices $(alpha, omega) in K times C_Sigma$, define the $cC^i  (alpha) -> cC^i (omega)$ component of the linear map $psi^i_k : bC_k^i -> bM_k ^i$  by 
+  This is analogous to @notes[Proposition 8.10] and @notes[Lemma 8.11]. Again, it suffices to assume $Sigma = {(sigma lt.tri tau)}$. For each $k >= 0$ and for each pair of $k$-simplices $(alpha, omega) in K times C_Sigma$, define the $cC^i  (alpha) -> cC^i (omega)$ component of the linear map $psi^i_k : bC_k^i -> bM_k ^i$  by 
   $
     psi^i_k |_(alpha, omega) = cases(
       id_(cC^i (alpha)) quad & alpha = omega != tau comma, 
@@ -523,8 +541,7 @@ To simplify later proofs, we first need an 'induction principle' for the Morse c
   One can verify that $psi^i_cx$ and $phi^i_cx$ are two chain maps.
   //  #TODO[...] 
   We then note that $psi^i_k oo phi^i_k$ is the identity map on $bM^i_k$. Indeed, for each $omega, omega' in bM_k^i$, 
-  $
-    (psi^i_k oo phi^i_k)|_(omega, omega') = sum_(alpha in bC_k^i) psi^i_k |_(alpha, omega') oo phi^i_k |_(omega, alpha).
+  $(psi^i_k oo phi^i_k)|_(omega, omega') = sum_(alpha in bC_k^i) psi^i_k |_(alpha, omega') oo phi^i_k |_(omega, alpha).
   $
   If $alpha = sigma$, then $phi^i_k |_(omega, alpha) = 0$. If $alpha = tau$, then $psi^i_k |_(alpha, omega') = 0$. Thus we only need to consider the case when $alpha in.not {tau, sigma}$. Then we see that if $omega != omega'$, one of $psi^i_k |_(alpha, omega')$ and $ phi^i_k |_(omega, alpha)$ must be $0$; if $omega = omega'$, we have $psi^i_k |_(alpha, omega') oo phi^i_k |_(omega, alpha) = id_(cC^i (omega))$ only if $alpha = omega = omega'$. 
 
@@ -545,15 +562,15 @@ To simplify later proofs, we first need an 'induction principle' for the Morse c
     )
   $
   gives a chain homotopy between $phi^i_k oo psi^i_k$ and the identity chain map on $bC_k^i$.
-
-  Then to move on to general cases of $Sigma$, the discussion at the end of @notes[Section 8.3] also applies with slight modification. In particular, by removing a single pair $(sigma lt.tri tau) in Sigma$ from $K$, we change any $ci(alpha, omega)$ to $ci(alpha, omega) - ci(tau, omega) oo (ci(tau, sigma))^(-1) oo ci(alpha, sigma)$. Now suppose for another pair $(sigma' lt.tri tau') in Sigma$, we have $ci(tau, sigma') oo (ci(tau, sigma))^(-1) oo ci(tau', sigma) != 0$. This indicates that $tau' gt.tri sigma lt.tri tau gt.tri sigma'$, but since $sigma' lt.tri tau'$, we have constructed a $Sigma$-cycle, which contradicts the acyclicity of $Sigma$.
+  // Then to move on to general cases of $Sigma$, the discussion at the end of @notes[Section 8.3] also applies with slight modification. In particular, by removing a single pair $(sigma lt.tri tau) in Sigma$ from $K$, we change any $ci(alpha, omega)$ to $ci(alpha, omega) - ci(tau, omega) oo (ci(tau, sigma))^(-1) oo ci(alpha, sigma)$. Now suppose for another pair $(sigma' lt.tri tau') in Sigma$, we have $ci(tau, sigma') oo (ci(tau, sigma))^(-1) oo ci(tau', sigma) != 0$. This indicates that $tau' gt.tri sigma lt.tri tau gt.tri sigma'$, but since $sigma' lt.tri tau'$, we have constructed a $Sigma$-cycle, which contradicts the acyclicity of $Sigma$.
   // #TODO[do we want to write more?]
 ]
-By induction on $Sigma$, a by-product of the proof above is the following:
-#corollary[
-  There exists a chain map $phi^i_cx : bM_cx^i -> bC_cx^i$ which induces an isomorphism   $bH_k (bM^i_cx) -> bH_k (bC^i_cx)$ for each dimension $k>=0$.
-]
-<iso-homo>
+// By induction on $Sigma$, 
+// A by-product of the proof above is the following:
+// #corollary[
+
+// ]
+// <iso-homo>
 
 == The Commutative Cube
 
@@ -563,7 +580,7 @@ placement: auto
 )[
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGsA9AFYgAvqXSZc+QijIBGKrUYs2XbgApeAajkBKIaPEgM2PASIAmcovrNWiDj00796wbsMTT0y6QXVbFQc1Zz1+NxdPY0kzGWQ5UgsbZXsOAFkNXld3KJMpcxQAZkTku1UM0OyPMS98uITC0qD0zJdwnJro7wLkYsaAlPLWsIi9UUUYKABzeCJQADMAJwgAWyQEkBwIJDIlMocoLHn54f1hTqXVneotpCs95oAFbD4DC+W1xA3bxGKH1OeWFObyMl0+fx+90CqUOx2Bo2qoI+SAALDdtogAKwDfabLAMWDqQG6V7nJFXRAANnRSAA7DjmngCTAidgSZUQQtkVSaYg0f82EzCbD5uztGFhNQGHR2DAGI8Yj4HIssFMABY4KJgum87EChxClkisVtBEgKUyuUK7oyEAq9Wa94U-k-XY4Oj4thqiAQXha7nUzYY74ehhen1+p2fPWQm6h8O+-0U+lBpAQ+MOb2JkQUERAA
 #align(center, commutative-diagram(
-  node-padding: (50pt, 50pt),
+  node-padding: (70pt, 40pt),
   node((0, 0), [$bC_(k-1)^i$]),
   node((1, 0), [$bC_(k)^i$]),
   node((0, 2), [$bC_(k-1)^(i+1)$]),
@@ -587,7 +604,7 @@ placement: auto
 ))
 ]
 <cube>
-In @cube, we have shown that the back face commutes, since each $Psi^i_cx$ is a chain map; the left face (as well as the right face) commutes, since each $phi_cx^i$ is a chain map; and furthermore, each slant arrow $phi^i_k$ induces an isomorphism on homology.
+In @cube, each vertical line is a chain complex. We have shown that the back face commutes, since each $Psi^i_cx$ is a chain map; the left face (as well as the right face) commutes, since each $phi_cx^i$ is a chain map; and furthermore, each slant arrow $phi^i_k$ induces an isomorphism on homology.
 To show the commutativity of the remaining faces,
 now we consider what happens when we vary $i$, the stage of the filtration. 
 
@@ -597,16 +614,15 @@ now we consider what happens when we vary $i$, the stage of the filtration.
 <front-commute>
 #proof[
   For each dimension $k >= 0$,
-  for an arbitrary pair of critical $k$-simplices $alpha, alpha'$, define the $cC^i  (alpha) -> cC^(i+1) (alpha')$ component of the linear map $tilde(Psi)^i_k : bM_k^i -> bM_k^(i+1)$ as 
-  $
-    cases(
-      Psi^i_alpha quad & alpha = alpha' comma , 
-      0 quad & "otherwise".
-    )
-  $
+  for an arbitrary pair of critical $k$-simplices $alpha, alpha'$, define the $cC^i  (alpha) -> cC^(i+1) (alpha')$ component of the linear map $tilde(Psi)^i_k : bM_k^i -> bM_k^(i+1)$ as $Psi^i_alpha$ if $alpha = alpha'$ and $0$ otherwise.
+  // $
+  //   cases(
+  //     Psi^i_alpha quad & alpha = alpha' comma , 
+  //     0 quad & "otherwise".
+  //   )
+  // $
   Then it suffices to show for any critical $k$-simplex $alpha$ and critical $(k-1)$-simplex $beta$, 
-  $
-    d_k^(i+1) |_(alpha, beta) oo Psi_alpha^i = Psi_beta^i oo d_k^(i) |_(alpha, beta),
+  $d_k^(i+1) |_(alpha, beta) oo Psi_alpha^i = Psi_beta^i oo d_k^(i) |_(alpha, beta),
   $
   which by definition expands  to 
   #math.equation(block: true, numbering: "(1)", supplement: "Equation",
@@ -698,7 +714,7 @@ By the functoriality of homology, for each dimension $k >= 0$, the following com
   arr((0, 1), (0, 2), [$...$]),
   arr((1, 1), (1, 2), [$...$]),
 ))
-By @iso-homo, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^(i->j)$ would have an isomorphic image as $bH_k Psi^(i->j)$. The result thus follows from the definition of persistent homology.
+By @morse-equivalent, each vertical line is an isomorphism between homology groups, so each $bH_k tilde(Psi)^(i->j)$ would have an isomorphic image as $bH_k Psi^(i->j)$. The result thus follows from the definition of persistent homology.
 ]
 // #TODO[don't know if we need the dot..]
 

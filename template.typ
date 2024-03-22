@@ -29,7 +29,7 @@
 #let thmboxparams = (
   breakable: true,
   separator: [#h(0em).#h(0.2em)],
-  padding: (top: 0.2em, bottom: 0.2em),
+  padding: (top: 0.1em, bottom: 0.1em),
   inset: 0em,
   base_level: 0,
 )
