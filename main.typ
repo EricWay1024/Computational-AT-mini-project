@@ -375,7 +375,7 @@ The following is based on @notes[Section 8.1].
   )
   <fit-example>
 #example[
-  Take $K = Delta(1)$ with $tau_1, tau_2, tau_3$ defined as in @task-3-3. We define the following cosheaves $cC^1, cC^2, cC^3$ on $K$ together with morphisms $Psi^1 : cC^1 -> cC^2$ and $Psi^2: cC^2 -> cC^3$, shown in @fit-example. Note that each $cC^i$ assigns a vector space to each $tau_j$ and a linear map to each of the coface relations $tau_3 >= tau_1$ and $tau_3 >= tau_2$. Each $Psi^i$ then assigns a linear map $cC^i (tau_j) -> cC^(i+1) (tau_j)$ to each $tau_j$. To verify the naturality of each $Psi^i$, note that the only non-trivial relation here is $  cC^3 (tau_3 >= tau_1) oo Psi^2 _(tau_3) = Psi^2 _(tau_1) oo cC^2 (tau_3 >= tau_1)$, i.e., 
+  Take $K = Delta(1)$ with $tau_1, tau_2, tau_3$ defined as in @task-3-3. We define the cosheaves $cC^1, cC^2, cC^3$ on $K$ together with morphisms $Psi^1 : cC^1 -> cC^2$ and $Psi^2: cC^2 -> cC^3$, shown in @fit-example. Note that each $cC^i$ assigns a vector space to each $tau_j$ and a linear map to each of the coface relations $tau_3 >= tau_1$ and $tau_3 >= tau_2$. Each $Psi^i$ then assigns a linear map $cC^i (tau_j) -> cC^(i+1) (tau_j)$ to each $tau_j$. To verify the naturality of each $Psi^i$, note that the only non-trivial relation here is $  cC^3 (tau_3 >= tau_1) oo Psi^2 _(tau_3) = Psi^2 _(tau_1) oo cC^2 (tau_3 >= tau_1)$, i.e., 
   $
     mat(1, 2; 0, 4; 0, 3) mat(1; 0) = mat(1; 0; 0).
   $
@@ -580,7 +580,7 @@ placement: auto
 )[
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGsA9AFYgAvqXSZc+QijIBGKrUYs2XbgApeAajkBKIaPEgM2PASIAmcovrNWiDj00796wbsMTT0y6QXVbFQc1Zz1+NxdPY0kzGWQ5UgsbZXsOAFkNXld3KJMpcxQAZkTku1UM0OyPMS98uITC0qD0zJdwnJro7wLkYsaAlPLWsIi9UUUYKABzeCJQADMAJwgAWyQEkBwIJDIlMocoLHn54f1hTqXVneotpCs95oAFbD4DC+W1xA3bxGKH1OeWFObyMl0+fx+90CqUOx2Bo2qoI+SAALDdtogAKwDfabLAMWDqQG6V7nJFXRAANnRSAA7DjmngCTAidgSZUQQtkVSaYg0f82EzCbD5uztGFhNQGHR2DAGI8Yj4HIssFMABY4KJgum87EChxClkisVtBEgKUyuUK7oyEAq9Wa94U-k-XY4Oj4thqiAQXha7nUzYY74ehhen1+p2fPWQm6h8O+-0U+lBpAQ+MOb2JkQUERAA
 #align(center, commutative-diagram(
-  node-padding: (40pt, 40pt),
+  node-padding: (50pt, 40pt),
   node((0, 0), [$bC_(k-1)^i$]),
   node((1, 0), [$bC_(k)^i$]),
   node((0, 2), [$bC_(k-1)^(i+1)$]),
