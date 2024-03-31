@@ -90,7 +90,7 @@ Now fix a cosheaf $cC : (K, >=) -> VF$ over $K$.
     &= (sum_(dim tau' = k) [tau'' : tau'][tau' : tau]) dot cC (tau >= tau''), \ 
     // &= 0,
   $
-  where $cC (tau' >= tau'') oo   cC (tau >= tau') = cC (tau >= tau'')$ by the associativity axiom and $sum_(dim tau' = k) [tau'' : tau'][tau' : tau] = 0$ because it is the coefficient of $tau$ in $diff_k^K oo diff_(k+1)^K$.
+  where $cC (tau' >= tau'') oo   cC (tau >= tau') = cC (tau >= tau'')$ by the associativity axiom and $sum_(dim tau' = k) [tau'' : tau'][tau' : tau] = 0$ because it is the coefficient from $tau$ to $tau''$ in $diff_k^K oo diff_(k+1)^K$.
 ]
 
 #definition[
@@ -458,7 +458,7 @@ To simplify later proofs, we first need an 'induction principle' for the Morse c
 <induction-principle>
 #proof[
   We suppress the explicit appearance of $K$ and $cC^i$ in the notations as they are fixed in this proof.
-  First, we notice that if $Sigma_0 = {(sigma lt.tri tau)}$ with $dim sigma + 1 = dim tau = k$, then the only $Sigma_0$-path is $(sigma lt.tri tau)$, and the construction of the Morse complex $(bC_cx^(Sigma_0) , d_cx ^(Sigma_0) )$ based on the _sequence_ $(bC_cx , d_cx  )$ (we forget that $(bC_cx , d_cx  )$ is a chain complex for this algorithm) is equivalent to the following algorithm $(star)$:
+  First, we notice that if $Sigma_0 = {(sigma lt.tri tau)}$ with $dim sigma + 1 = dim tau = k$, then the only $Sigma_0$-path is $(sigma lt.tri tau)$, and the construction of the Morse complex $(bC_cx^(Sigma_0) , d_cx ^(Sigma_0) )$ based on the _sequence_ $(bC_cx , d_cx  )$ (we may forget that $(bC_cx , d_cx  )$ is a chain complex for now) is equivalent to applying the following algorithm $(star)$ with $(sigma lt.tri tau)$ to $(C_cx, d_cx)$:
   + For each $k$-simplex $alpha$ and $(k-1)$-simplex $beta$, change the block $d_k |_(alpha, beta)$ to $ d_k |_(alpha, beta) - d_k |_(tau, beta) oo (d_k|_(tau, sigma))^(-1) oo d_k |_(alpha, sigma); $ 
   + Remove $cC^i (tau)$ from the product of $bC_k$ and remove $cC^i (sigma)$ from the product of $bC_(k-1)$, and remove all corresponding blocks from $d_(k+1)$, $d_k$ and $d_(k-1)$.
   // + $diff_k^bD |_(alpha, beta)- diff_k^bD |_(tau, beta) oo (cC^i_(tau, sigma))^(-1) oo diff_k^bD |_(alpha, sigma),$
@@ -476,9 +476,9 @@ To simplify later proofs, we first need an 'induction principle' for the Morse c
   $
   The last but one equality is because any $rho in Gamma_Sigma$ 
   - either does not consist of $(sigma lt.tri tau)$, in which case $rho = rho_1 in Gamma_Sigma'$, 
-  - or passes $(sigma lt.tri tau)$ once, in which case $rho$ can be written as $(rho_3 gt.tri sigma lt.tri tau gt.tri rho_2)$ for $rho_2, rho_3 in Gamma_Sigma'$.
+  - or passes $(sigma lt.tri tau)$ exactly once, in which case $rho$ can be written as $(rho_3 gt.tri sigma lt.tri tau gt.tri rho_2)$ for $rho_2, rho_3 in Gamma_Sigma'$ and then $cw (alpha gt.tri rho gt.tri beta)$ can be decomposed as in the summand.
 
-  Step (2) of algorithm $(star)$ simply updates the critical simplices by removing $sigma$ and $tau$. Thus, we see that applying algorithm $(star)$ to $(bC_cx^(Sigma') , d_cx ^(Sigma') )$ produces the same $(bC_cx^(Sigma) , d_cx ^(Sigma) )$ as in @def-morse. In other words, we could have equivalently defined the Morse complex as the sequence produced by recursively applying algorithm $(star)$ with each pair of $Sigma$ (in an arbitrary order) to $(bC_cx, d_cx)$. This constructive definition indicates this lemma.
+  Step (2) of algorithm $(star)$ simply updates the critical simplices by removing $sigma$ and $tau$. Thus, we see that applying algorithm $(star)$ with $(sigma lt.tri tau)$ to $(bC_cx^(Sigma') , d_cx ^(Sigma') )$ produces the same $(bC_cx^(Sigma) , d_cx ^(Sigma) )$ as in @def-morse. In other words, we could have equivalently defined the Morse complex as the sequence produced by recursively applying algorithm $(star)$ with each pair of $Sigma$ (in an arbitrary order) to $(bC_cx, d_cx)$. This constructive definition indicates our 'induction principle'.
 ]
 
 // #TODO[change all $cC^i$ to $cC$ since they are fixed...]
@@ -580,7 +580,7 @@ placement: auto
 )[
 // https://t.yw.je/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACMBhAfQGsA9AFYgAvqXSZc+QijIBGKrUYs2XbgApeAajkBKIaPEgM2PASIAmcovrNWiDj00796wbsMTT0y6QXVbFQc1Zz1+NxdPY0kzGWQ5UgsbZXsOAFkNXld3KJMpcxQAZkTku1UM0OyPMS98uITC0qD0zJdwnJro7wLkYsaAlPLWsIi9UUUYKABzeCJQADMAJwgAWyQEkBwIJDIlMocoLHn54f1hTqXVneotpCs95oAFbD4DC+W1xA3bxGKH1OeWFObyMl0+fx+90CqUOx2Bo2qoI+SAALDdtogAKwDfabLAMWDqQG6V7nJFXRAANnRSAA7DjmngCTAidgSZUQQtkVSaYg0f82EzCbD5uztGFhNQGHR2DAGI8Yj4HIssFMABY4KJgum87EChxClkisVtBEgKUyuUK7oyEAq9Wa94U-k-XY4Oj4thqiAQXha7nUzYY74ehhen1+p2fPWQm6h8O+-0U+lBpAQ+MOb2JkQUERAA
 #align(center, commutative-diagram(
-  node-padding: (70pt, 40pt),
+  node-padding: (40pt, 40pt),
   node((0, 0), [$bC_(k-1)^i$]),
   node((1, 0), [$bC_(k)^i$]),
   node((0, 2), [$bC_(k-1)^(i+1)$]),
@@ -645,7 +645,7 @@ Psi_alpha^i = \ Psi_beta^i oo
    $) <eq3>
    
   Finally, note that each $w_(i+1) (rho)$ consists of nothing but compositions of $cC^(i+1) _(ast, ast)$ or its inverse, apart from a sign.
-  So for each summand on the LHS of @eq1, we can imagine passing $Psi_alpha^i$ step-by-step from right to left using @eq2 or @eq3, changing the superscript $(i+1)$ to $i$ at each step, and eventually $Psi_alpha^i$ becomes $Psi_beta^i$ on the far left, which is exactly a corresponding summand on the RHS of @eq1.
+  So for each summand on the left-hand side of @eq1, we can imagine passing $Psi_alpha^i$ step-by-step from right to left using @eq2 or @eq3, changing the superscript $(i+1)$ to $i$ at each step, and eventually $Psi_alpha^i$ becomes $Psi_beta^i$ on the far left, which is exactly a corresponding summand on the right-hand side of @eq1.
 ]
 
 #proposition[
@@ -726,7 +726,7 @@ In this project, working with a finite simplicial complex $K$ and a field $FF$, 
 + We have given some examples of $K$ and $cC$ (@task-3-1, @task-3-2, and @task-3-3) and shown that there does not exist a strict epimorphism $Phi : FK -> cC$ which induces an isomorphism on homology for any $K$ and $cC$ (@task-3-4); 
 + We have defined a filtration ${cC^i}$ of a cosheaf $cC$  of $K$ and defined the persistent homology of $K$ with coefficients in ${cC^i}$(@def-filtration);
 + We have defined an acyclic partial matching $Sigma$ on $K$ which is compatible with a filtration ${cC^i}$ (@def-compatible) and offered an example (@fit-example-1);
-+ We have defined the Morse chain complex $bC_cx^Sigma (K ; cC^i)$ of $Sigma$ with coefficients in ${cC^i}$ when $Sigma$ is compatible with ${cC^i}$ (@def-morse), verified that $bC_cx^Sigma (K ; cC^i)$ is a chain complex (@morse-is-chain) and shown that $bC_cx^Sigma (K ; cC^i)$ is chain homotopy equivalent to $bC_cx (K ; cC^i)$ (@morse-equivalent). By constructing relevant maps and showing the commutativity of @cube (@front-commute and @bottom-commute), we have deduced that $bC_cx^Sigma (K ; cC^i)$ and $bC_cx (K ; cC^i)$ induce the same persistent homology (@same-persistence).
++ We have defined the Morse chain complex $bC_cx^Sigma (K ; cC^i)$ of $Sigma$ with coefficients in ${cC^i}$ when $Sigma$ is compatible with ${cC^i}$ (@def-morse). After proving an 'induction principle' (@induction-principle) for Morse complexes, we verified that $bC_cx^Sigma (K ; cC^i)$ is a chain complex (@morse-is-chain) and shown that $bC_cx^Sigma (K ; cC^i)$ is chain homotopy equivalent to $bC_cx (K ; cC^i)$ (@morse-equivalent). By constructing relevant maps and showing the commutativity of @cube (@front-commute and @bottom-commute), we have deduced that $bC_cx^Sigma (K ; cC^i)$ and $bC_cx (K ; cC^i)$ induce the same persistent homology (@same-persistence).
 
 As the Morse chain complex is constructed using only a subset of (critical) simplices in $K$, it has the potential to simplify the computation of the persistent homology with coefficients in a filtration ${cC^i}$. One shortcoming of the current method is that the condition which we have imposed for an acyclic partial matching $Sigma$ to be compatible with ${cC^i}$ is a rather strong one and thus may be difficult to satisfy in a practical setting.
 
